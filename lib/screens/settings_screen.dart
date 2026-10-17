@@ -1,6 +1,5 @@
 import 'package:finamp/components/SettingsScreen/logout_list_tile.dart';
 import 'package:finamp/components/finamp_app_bar_back_button.dart';
-import 'package:finamp/components/finamp_icon.dart';
 import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/menus/client_certificate_authentication_menu.dart';
 import 'package:finamp/menus/quick_connect_authorization_menu.dart';
@@ -20,14 +19,10 @@ import 'package:finamp/screens/view_selector.dart';
 import 'package:finamp/screens/volume_normalization_settings_screen.dart';
 import 'package:finamp/services/client_certificate_installer.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:locale_names/locale_names.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -39,10 +34,6 @@ class SettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
-  static const repoLink = "https://github.com/finamp-app/finamp";
-  static const releaseNotesLink = "https://github.com/finamp-app/finamp/releases";
-  static const translationsLink = "https://hosted.weblate.org/projects/finamp";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,83 +45,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             context,
             FinampSettingsHelper.resetAllSettings,
             isGlobal: true,
-          ),
-          Semantics.fromProperties(
-            properties: SemanticsProperties(label: AppLocalizations.of(context)!.about, button: true),
-            excludeSemantics: true,
-            container: true,
-            child: IconButton(
-              icon: const Icon(Icons.info),
-              onPressed: () async {
-                final localizations = AppLocalizations.of(context)!;
-                final applicationLegalese = AppLocalizations.of(context)!.applicationLegalese(repoLink);
-                PackageInfo packageInfo = await PackageInfo.fromPlatform();
-                if (!context.mounted) return;
-
-                ThemeData theme = Theme.of(context);
-                const linkStyle = TextStyle(color: Colors.blue, decoration: TextDecoration.underline);
-
-                showAboutDialog(
-                  context: context,
-                  applicationName: packageInfo.appName,
-                  applicationVersion: packageInfo.version,
-                  applicationIcon: Padding(padding: const EdgeInsets.only(top: 8.0), child: FinampIcon(56, 56)),
-                  applicationLegalese: applicationLegalese,
-                  children: [
-                    const SizedBox(height: 20),
-                    RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        style: TextStyle(color: theme.textTheme.bodyMedium!.color),
-                        children: [
-                          TextSpan(
-                            text: localizations.finampTagline,
-                            style: const TextStyle(fontStyle: FontStyle.italic, fontWeight: FontWeight.w500),
-                          ),
-                          const TextSpan(text: '\n\n'),
-                          TextSpan(text: localizations.aboutContributionPrompt),
-                          const TextSpan(text: '\n\n'),
-                          TextSpan(text: '${localizations.aboutContributionLink}\n'),
-                          TextSpan(
-                            text: repoLink,
-                            style: linkStyle,
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () async {
-                                await launchUrl(Uri.parse(repoLink));
-                              },
-                          ),
-                          const TextSpan(text: '\n\n'),
-                          TextSpan(text: '${localizations.aboutTranslations}\n'),
-                          TextSpan(
-                            text: translationsLink,
-                            style: linkStyle,
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () async {
-                                await launchUrl(Uri.parse(translationsLink));
-                              },
-                          ),
-                          const TextSpan(text: '\n\n'),
-                          TextSpan(text: '${localizations.aboutReleaseNotes}\n'),
-                          TextSpan(
-                            text: releaseNotesLink,
-                            style: linkStyle,
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () async {
-                                await launchUrl(Uri.parse(releaseNotesLink));
-                              },
-                          ),
-                          const TextSpan(text: '\n\n\n'),
-                          TextSpan(
-                            text: localizations.aboutThanks,
-                            style: const TextStyle(fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
           ),
         ],
       ),
@@ -234,6 +148,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             enabled: ClientCertificateInstaller.isSupported,
             onTap: () => showClientCertificateMenu(context: context),
+          ),
+          ListTile(
+            leading: const Icon(Icons.description_outlined),
+            title: Text(MaterialLocalizations.of(context).viewLicensesButtonLabel),
+            onTap: () => showLicensePage(context: context, applicationName: AppLocalizations.of(context)!.finamp),
           ),
           const LogoutListTile(),
         ],

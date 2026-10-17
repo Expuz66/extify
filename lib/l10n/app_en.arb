@@ -1,5 +1,5 @@
 {
-    "finamp": "Finamp",
+    "finamp": "Extify",
     "@finamp": {
         "description": "App name, possibly translated"
     },
@@ -489,7 +489,7 @@
     "@playbackSpeedControlSettingSubtitle": {
         "description": "Subtitle for the playback speed visibility setting"
     },
-    "playbackSpeedControlSettingDescription": "Automatic:\nFinamp tries to identify whether the track you are playing is a podcast or (part of) an audiobook. This is considered to be the case if the track is longer than {trackDuration} minutes, if the track''s album is longer than {albumDuration} hours, or if the track has at least one of these genres assigned: {genreList}\nPlayback speed controls will then be shown in the player screen menu.\n\nShown:\nThe playback speed controls will always be shown in the player screen menu.\n\nHidden:\nThe playback speed controls in the player screen menu are always hidden.",
+    "playbackSpeedControlSettingDescription": "Automatic:\nExtify tries to identify whether the track you are playing is a podcast or (part of) an audiobook. This is considered to be the case if the track is longer than {trackDuration} minutes, if the track''s album is longer than {albumDuration} hours, or if the track has at least one of these genres assigned: {genreList}\nPlayback speed controls will then be shown in the player screen menu.\n\nShown:\nThe playback speed controls will always be shown in the player screen menu.\n\nHidden:\nThe playback speed controls in the player screen menu are always hidden.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -738,6 +738,38 @@
                 "example": "401"
             }
         }
+    },
+    "errorNoInternetConnection": "No internet connection",
+    "@errorNoInternetConnection": {
+        "description": "Title shown when an operation fails because the device has no usable network connection."
+    },
+    "errorNoInternetConnectionBody": "Check your internet connection and try again.",
+    "@errorNoInternetConnectionBody": {
+        "description": "Supporting text shown underneath the no internet connection message."
+    },
+    "errorIncorrectCredentials": "Incorrect username or password",
+    "@errorIncorrectCredentials": {
+        "description": "Title shown when the Jellyfin server rejects the submitted login credentials."
+    },
+    "errorIncorrectCredentialsBody": "Please check your login details and try again.",
+    "@errorIncorrectCredentialsBody": {
+        "description": "Supporting text shown underneath the incorrect credentials message."
+    },
+    "errorUnableToConnectToServer": "Unable to connect to server",
+    "@errorUnableToConnectToServer": {
+        "description": "Message shown when the server cannot be reached, for example a refused connection, DNS failure or timeout."
+    },
+    "errorServerTemporarilyUnavailable": "Server temporarily unavailable",
+    "@errorServerTemporarilyUnavailable": {
+        "description": "Message shown when the server responds with a server-side (HTTP 5xx) error."
+    },
+    "errorSomethingWentWrong": "Something went wrong. Please try again.",
+    "@errorSomethingWentWrong": {
+        "description": "Message shown for unexpected errors that cannot be classified more precisely."
+    },
+    "tryAgain": "Try again",
+    "@tryAgain": {
+        "description": "Label of the action that retries the operation that just failed."
     },
     "removeFromMix": "Remove From Mix",
     "addToMix": "Add To Mix",
@@ -1052,7 +1084,7 @@
     "@reportQueueToServer": {
         "description": "Label for the setting that toggles reporting of the current queue to the Jellyfin server"
     },
-    "reportQueueToServerSubtitle": "When enabled, Finamp will send the current queue to the server. This can improve remote control and allow server-side restoration of the queue. Always enabled if the 'Play On' feature is enabled.",
+    "reportQueueToServerSubtitle": "When enabled, Extify will send the current queue to the server. This can improve remote control and allow server-side restoration of the queue. Always enabled if the 'Play On' feature is enabled.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1080,7 +1112,7 @@
     "@enablePlayonTitle": {
         "description": "Label for the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
-    "enablePlayonSubtitle": "Enables Jellyfin's 'Play On' feature (remote-controlling Finamp from another client). Disable this if your reverse proxy or server doesn't support websockets.",
+    "enablePlayonSubtitle": "Enables Jellyfin's 'Play On' feature (remote-controlling Extify from another client). Disable this if your reverse proxy or server doesn't support websockets.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1274,7 +1306,7 @@
     "@noMusicLibrariesTitle": {
         "description": "Title for message that shows on the views screen when no music libraries could be found."
     },
-    "noMusicLibrariesBody": "Finamp could not find any music libraries. Please ensure that your Jellyfin server contains at least one library with the content type set to \"Music\".",
+    "noMusicLibrariesBody": "Extify could not find any music libraries. Please ensure that your Jellyfin server contains at least one library with the content type set to \"Music\".",
     "refresh": "Refresh",
     "moreInfo": "More Info",
     "volumeNormalizationSettingsTitle": "Volume Normalization",
@@ -2386,7 +2418,7 @@
     "@autoReloadQueueTitle": {
         "description": "Title for the setting that controls if the queue is automatically reloaded when the source changes"
     },
-    "autoReloadQueueSubtitle": "Automatically reload the queue when the source changes (i.e. offline mode enabled or server address switch). If disabled, Finamp will prompt you instead.",
+    "autoReloadQueueSubtitle": "Automatically reload the queue when the source changes (i.e. offline mode enabled or server address switch). If disabled, Extify will prompt you instead.",
     "@autoReloadQueueSubtitle": {
         "description": "Subtitle for the setting that controls if the queue is automatically reloaded when the source changes"
     },
@@ -2620,7 +2652,7 @@
     "@serverSharingMenuButtonTitle": {
         "description": "Title for the button in the drawer that opens the server sharing menu"
     },
-    "serverSharingMenuConfirmationDialogText": "Are you sure you want to enable server sharing even though you're in Offline Mode? This will cause Finamp to send data over the local network.",
+    "serverSharingMenuConfirmationDialogText": "Are you sure you want to enable server sharing even though you're in Offline Mode? This will cause Extify to send data over the local network.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -2648,7 +2680,7 @@
     "@serverSharingMenuDescription": {
         "description": "Description text shown in the server sharing menu, right below the controls"
     },
-    "serverSharingMenuDetails": "It works by listening to server discovery requests by other clients on the local network, and then replying to those requests with the configured address of your Jellyfin server.\nIf you have both a local and public address configured, Finamp will provide both to the requesting client.",
+    "serverSharingMenuDetails": "It works by listening to server discovery requests by other clients on the local network, and then replying to those requests with the configured address of your Jellyfin server.\nIf you have both a local and public address configured, Extify will provide both to the requesting client.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -2688,7 +2720,7 @@
     "@quickConnectAuthorizationMenuStateSubtitleFailed": {
         "description": "Subtitle for the quick connect authorization menu state info (above the input field) when the authorization was unsuccessful"
     },
-    "quickConnectAuthorizationMenuDescription": "If you're trying to sign into another Jellyfin client via Quick Connect, you can enter or paste the 6 digit code into the field above. This will authorize the sign in request of the other client, and log you into the same account as you're using for Finamp.",
+    "quickConnectAuthorizationMenuDescription": "If you're trying to sign into another Jellyfin client via Quick Connect, you can enter or paste the 6 digit code into the field above. This will authorize the sign in request of the other client, and log you into the same account as you're using for Extify.",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },
@@ -2728,15 +2760,15 @@
     "@discordRPCIconSettingDescription": {
         "description": "Description for the setting that controls which Icon the discord RPC displays as a Fallback in case no public address is detected (it doenst matter what connection is active)."
     },
-    "discordRPCIconDark": "Finamp - Dark",
+    "discordRPCIconDark": "Extify - Dark",
     "@discordRPCIconDark": {
         "description": "A REALLY short description of the icon in use. Its format is 'ICON, BACKGROUND'. This one is the Finamp logo with the Dark-Theme Background"
     },
-    "discordRPCIconBlack": "Finamp - Black",
+    "discordRPCIconBlack": "Extify - Black",
     "@discordRPCIconBlack": {
         "description": "A REALLY short description of the icon in use. Its format is 'ICON, BACKGROUND'. This one is the Finamp logo with a Black Background"
     },
-    "discordRPCIconLight": "Finamp - White",
+    "discordRPCIconLight": "Extify - White",
     "@discordRPCIconLight": {
         "description": "A REALLY short description of the icon in use. Its format is 'ICON, BACKGROUND'. This one is the Finamp logo with a White Background"
     },
@@ -2744,11 +2776,11 @@
     "@discordRPCIconJFTransparent": {
         "description": "A REALLY short description of the icon in use. Its format is 'ICON, BACKGROUND'. This one is the Jellyfin logo with a Transparent Background"
     },
-    "discordRPCIconTransparent": "Finamp - Transparent",
+    "discordRPCIconTransparent": "Extify - Transparent",
     "@discordRPCIconTransparent": {
         "description": "A REALLY short description of the icon in use. Its format is 'ICON, BACKGROUND'. This one is the Finamp logo with a Transparent Background"
     },
-    "discordRPCIconWhiteTransparent": "White Finamp - Transparent",
+    "discordRPCIconWhiteTransparent": "White Extify - Transparent",
     "@discordRPCIconWhiteTransparent": {
         "description": "A REALLY short description of the icon in use. Its format is 'ICON, BACKGROUND'. This one is the full white Finamp logo with a Transparent Background"
     },
@@ -2842,7 +2874,7 @@
     "@autoplayRestoredQueueSubtitle": {
         "description": "Subtitle for the setting that controls if restored queues automatically play."
     },
-    "missingBlurhashWarning": "Warning: The Jellyfin server appears to be misconfigured and is not calculating blurhashes.  This prevents Finamp from de-duplicating image downloads.  Please correct the server and run a downloads repair.",
+    "missingBlurhashWarning": "Warning: The Jellyfin server appears to be misconfigured and is not calculating blurhashes.  This prevents Extify from de-duplicating image downloads.  Please correct the server and run a downloads repair.",
     "@missingBlurhashWarning": {
         "description": "A warning message displayed on the downloads screen if the jellyfin server is missing blurhashes."
     },
@@ -3631,11 +3663,11 @@
     "@voiceSearch": {
         "description": "Heading for the page that prompts the user to perform a voice search."
     },
-    "carPlaySiriHint": "Say \"Hey Siri, play [track/artist/album] on Finamp\"",
+    "carPlaySiriHint": "Say \"Hey Siri, play [track/artist/album] on Extify\"",
     "@carPlaySiriHint": {
         "description": "Hint text for how to use Siri to search in CarPlay."
     },
-    "carPlayLoginPrompt": "Open the Finamp app on your phone to log in to your Jellyfin server.",
+    "carPlayLoginPrompt": "Open the Extify app on your phone to log in to your Jellyfin server.",
     "@carPlayLoginPrompt": {
         "description": "Label shown when the user is trying to use CarPlay without being logged in."
     },
@@ -3793,7 +3825,7 @@
     "perTabGridModeScreen": "Set per-tab view types",
     "perTabAlbumGrid": "Albums only in grid",
     "quickSettingsScreen": "Quick Settings",
-    "quickSettingsScreenDescription": "Customize Finamp to your preferences with these core options. Come back here any time via Settings.",
+    "quickSettingsScreenDescription": "Customize Extify to your preferences with these core options. Come back here any time via Settings.",
     "quickSettingsTabsLink": "Rearrange and hide tabs",
     "quickSettingsTranscodeLink": "All transcoding settings",
     "quickSettingsLayoutLink": "All layout & theme settings",

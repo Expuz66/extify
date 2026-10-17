@@ -15,6 +15,26 @@ import 'login_authentication_page.dart';
 import 'login_splash_page.dart';
 import 'login_user_selection_page.dart';
 
+/// Extify: the fixed Jellyfin server this build talks to.
+///
+/// The server-selection and account-selection steps are skipped, so the login
+/// form authenticates against this address directly. Keep it without a trailing
+/// slash/path: the API client appends path segments to this URL.
+///
+/// This is only a server address. No credentials or tokens are stored here; the
+/// username/password are entered by the user and the resulting session is saved
+/// by the normal [FinampUserHelper] mechanism.
+const String extifyDefaultServerUrl = "https://stream.expuz-server.my.id";
+
+/// Extify: points the shared Jellyfin API client at the fixed server.
+///
+/// The client resolves its target from [JellyfinApiHelper.baseUrlTemp] while a
+/// new session is being established, so this only has to be set before
+/// authenticating. It is cleared by the login code once a session is saved.
+void _pointJellyfinApiAtExtifyServer() {
+  GetIt.instance<JellyfinApiHelper>().baseUrlTemp = Uri.parse(extifyDefaultServerUrl);
+}
+
 class LoginFlow extends StatefulWidget {
   const LoginFlow({super.key});
 
@@ -83,8 +103,13 @@ class _LoginFlowState extends State<LoginFlow> {
             case LoginSplashPage.routeName:
               route = createRoute(
                 LoginSplashPage(
-                  onGetStartedPressed: () =>
-                      loginNavigatorKey.currentState!.pushNamed(LoginServerSelectionPage.routeName),
+                  // Extify: "Get Started" goes straight to the username/password
+                  // login form. Server selection and account selection are
+                  // skipped; the fixed server is configured internally.
+                  onGetStartedPressed: () {
+                    _pointJellyfinApiAtExtifyServer();
+                    loginNavigatorKey.currentState!.pushNamed(LoginAuthenticationPage.routeName);
+                  },
                 ),
               );
               break;
@@ -210,7 +235,11 @@ class ServerState {
     this.manualServer,
     this.selectedServer,
     this.baseUrl,
-  }) : clientDiscoveryHandler = JellyfinServerClientDiscovery();
+  }) : clientDiscoveryHandler = JellyfinServerClientDiscovery() {
+    // Extify: fall back to the bundled server so the URL is pre-filled instead
+    // of left empty. Callers can still pass an explicit URL (e.g. after logout).
+    baseUrl ??= extifyDefaultServerUrl;
+  }
 
   void onBaseUrlChanged(String baseUrl) {
     if (connectionTestDebounceTimer?.isActive ?? false) {

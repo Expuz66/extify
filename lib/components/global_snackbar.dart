@@ -8,6 +8,7 @@ import 'package:finamp/menus/components/menuEntries/dismiss_all_snackbars_menu_e
 import 'package:finamp/menus/components/menuEntries/menu_entry.dart';
 import 'package:finamp/menus/components/menuEntries/view_logs_menu_entry.dart';
 import 'package:finamp/menus/components/menu_item_info_header.dart';
+import 'package:finamp/services/app_error_classifier.dart';
 import 'package:finamp/services/feedback_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -153,9 +154,12 @@ class GlobalSnackbar {
     );
   }
 
-  /// Show an unlocalized error message to the user
+  /// Show a friendly, localized error message to the user.
+  ///
+  /// [event] is only used to classify the failure; raw backend details (URLs,
+  /// status lines, exception strings) are never shown to the user anymore.
   static void error(dynamic event) => _enqueue((context) => _error(context, event));
-  static void _error(BuildContext context, dynamic event) {
+  static Future<void> _error(BuildContext context, dynamic event) async {
     // Suppress common transient network error "Failed host lookup"
     bool suppressError = false;
     if (event is SocketException || event is ClientException) {
@@ -177,16 +181,13 @@ class GlobalSnackbar {
     }
 
     _logger.warning("Displaying error: $event", event);
-    String errorText;
-    if (event is Response) {
-      if (event.statusCode == 401) {
-        errorText = AppLocalizations.of(context)!.responseError401(event.error.toString(), event.statusCode);
-      } else {
-        errorText = AppLocalizations.of(context)!.responseError(event.error.toString(), event.statusCode);
-      }
-    } else {
-      errorText = event.toString();
-    }
+
+    // Classify into a friendly, localized message. This is never a login
+    // request, so a 401 here is not reported as a credential failure.
+    final l10n = requireL10n;
+    final errorKind = await classifyApiErrorWithConnectivity(event, isAuthenticationRequest: false);
+    final errorText = appErrorDisplayText(l10n, errorKind);
+
     // Only dedup NETWORK errors. Dedup is based on error "type", not URL/content.
     bool isNetworkError =
         event is SocketException ||
@@ -210,9 +211,17 @@ class GlobalSnackbar {
       _activeErrorKeys.add(dedupKey); // add to active keys
     }
 
+    final messenger = scaffoldState;
+    if (messenger == null || !messenger.mounted) {
+      if (dedupKey != null) {
+        _activeErrorKeys.remove(dedupKey);
+      }
+      return;
+    }
+
     // give immediate feedback that something went wrong
     FeedbackHelper.feedback(FeedbackType.warning);
-    final controller = scaffoldState!.showSnackBar(
+    final controller = messenger.showSnackBar(
       SnackBar(
         content: GestureDetector(
           onLongPress: () {
@@ -225,23 +234,7 @@ class GlobalSnackbar {
               showSnackbarOptionsMenu(context);
             }
           },
-          child: Text(AppLocalizations.of(context)!.anErrorHasOccured),
-        ),
-        action: SnackBarAction(
-          label: MaterialLocalizations.of(context).moreButtonTooltip,
-          onPressed: () => showDialog<void>(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text(AppLocalizations.of(context)!.error),
-              content: Text(errorText),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).maybePop(),
-                  child: Text(MaterialLocalizations.of(context).closeButtonLabel),
-                ),
-              ],
-            ),
-          ),
+          child: Text(errorText),
         ),
         duration: const Duration(seconds: 4),
         persist: false,
@@ -250,11 +243,13 @@ class GlobalSnackbar {
 
     // When this snackbar fully closes (timeout or swipe), clear the key if it matches, allowing future identical errors.
     if (dedupKey != null) {
-      controller.closed.then((reason) {
-        if (_activeErrorKeys.remove(dedupKey)) {
-          _logger.fine("Removed active error key after dismissal: $dedupKey (reason: $reason)");
-        }
-      });
+      unawaited(
+        controller.closed.then((reason) {
+          if (_activeErrorKeys.remove(dedupKey)) {
+            _logger.fine("Removed active error key after dismissal: $dedupKey (reason: $reason)");
+          }
+        }),
+      );
     }
   }
 

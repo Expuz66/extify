@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:finamp/services/finamp_settings_helper.dart';
+import 'package:finamp/utils/supported_locales.dart';
 import 'package:flutter/material.dart';
 import 'package:finamp/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,8 +14,10 @@ class LanguageList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Extify exposes English and Indonesian only. The remaining generated
+    // translations stay on disk but are not offered here.
     final locales = SplayTreeMap<String?, Locale>.fromIterable(
-      AppLocalizations.supportedLocales,
+      extifySupportedLocales,
       key: (element) => (element as Locale).toLanguageTag(),
       value: (element) => element as Locale,
     );

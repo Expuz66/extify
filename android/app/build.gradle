@@ -35,7 +35,13 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.unicornsonlsd.finamp"
+        // Extify: the installed application ID (Play Store / system identity).
+        // This is intentionally the only identifier changed here: the Kotlin
+        // `namespace` below is a compile-time-only package for the generated R
+        // class and relative manifest component names, and the MethodChannel
+        // names shared with Dart are internal string identifiers. Neither is
+        // part of the installed app identity, so they are left untouched.
+        applicationId "com.expuz.extify"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutter.versionCode
@@ -61,7 +67,7 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.release
-            resValue "string", "app_name", "Finamp"
+            resValue "string", "app_name", "Extify"
             // shrinkResources false
             // minifyEnabled false
         }
@@ -71,7 +77,7 @@ android {
             }
             applicationIdSuffix '.profile'
             // minifyEnabled true // avoid dexing issues
-            resValue "string", "app_name", "Finamp Profile"
+            resValue "string", "app_name", "Extify Profile"
         }
         debug {
             if (signingConfigs.hasProperty('debug')) {
@@ -79,7 +85,7 @@ android {
             }
             applicationIdSuffix '.debug'
             // minifyEnabled true // avoid dexing issues
-            resValue "string", "app_name", "Finamp Debug"
+            resValue "string", "app_name", "Extify Debug"
         }
     }
     namespace 'com.unicornsonlsd.finamp'

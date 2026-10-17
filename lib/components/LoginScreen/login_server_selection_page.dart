@@ -44,6 +44,14 @@ class _LoginServerSelectionPageState extends ConsumerState<LoginServerSelectionP
       }
     };
 
+    // Extify: automatically probe the pre-filled default server so it shows up
+    // as a selectable server without manual entry. If it is unreachable, nothing
+    // is selected and the user can still enter a server manually as before.
+    final prefillBaseUrl = widget.serverState.baseUrl;
+    if (prefillBaseUrl != null && prefillBaseUrl.isNotEmpty) {
+      widget.serverState.onBaseUrlChanged(prefillBaseUrl);
+    }
+
     _startDiscovery();
   }
 
@@ -295,6 +303,7 @@ class _LoginServerSelectionPageState extends ConsumerState<LoginServerSelectionP
               autocorrect: false,
               keyboardType: TextInputType.url,
               autofillHints: const [AutofillHints.url],
+              initialValue: widget.serverState.baseUrl,
               decoration: inputFieldDecoration(AppLocalizations.of(context)!.serverUrlHint),
               textInputAction: TextInputAction.next,
               onEditingComplete: () => node.nextFocus(),

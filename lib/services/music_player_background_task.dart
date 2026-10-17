@@ -302,7 +302,7 @@ class MusicPlayerBackgroundTask extends BaseAudioHandler with SeekHandler, Queue
 
     if (Platform.isWindows || Platform.isLinux) {
       _audioServiceBackgroundTaskLogger.info("Initializing media-kit for Windows/Linux");
-      JustAudioMediaKit.title = "Finamp";
+      JustAudioMediaKit.title = "Extify";
       JustAudioMediaKit.prefetchPlaylist = true; // cache upcoming tracks, enable gapless playback
       JustAudioMediaKit.bufferSize = FinampSettingsHelper.finampSettings.bufferSizeMegabytes * 1024 * 1024;
       JustAudioMediaKit.ensureInitialized(linux: true, windows: true, macOS: false, iOS: false, android: false);

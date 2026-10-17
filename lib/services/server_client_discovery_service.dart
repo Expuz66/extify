@@ -105,7 +105,7 @@ class JellyfinServerClientDiscovery {
                 address: _finampUserHelper.currentUser?.publicAddress ?? _finampUserHelper.currentUser?.baseURL,
                 endpointAddress: _finampUserHelper.currentUser?.publicAddress ?? _finampUserHelper.currentUser?.baseURL,
                 id: _finampUserHelper.currentUser?.serverId,
-                name: "Shared by Finamp",
+                name: "Shared by Extify",
               );
               final responseMessageActiveOrPublicAddress = jsonEncode(responseActiveOrPublicAddress);
               _clientDiscoveryLogger.info("Sending discovery response: $responseMessageActiveOrPublicAddress");
@@ -121,7 +121,7 @@ class JellyfinServerClientDiscovery {
                   address: _finampUserHelper.currentUser?.localAddress,
                   endpointAddress: _finampUserHelper.currentUser?.localAddress,
                   id: _finampUserHelper.currentUser?.serverId,
-                  name: "Shared by Finamp",
+                  name: "Shared by Extify",
                 );
                 final responseMessageLocalAddress = jsonEncode(responseLocalAddress);
                 _clientDiscoveryLogger.finest(

@@ -62,7 +62,7 @@ class PlaybackHistoryService {
       // stop periodic background updates if playback has ended
       _periodicUpdateTimer?.cancel();
       if (isDesktop) {
-        WindowManager.instance.setTitle("Finamp");
+        WindowManager.instance.setTitle("Extify");
       }
       return;
     }
@@ -102,7 +102,7 @@ class PlaybackHistoryService {
             currentIndex < 0 ||
             currentIndex >= _audioService.sequenceState.effectiveSequence.length) {
           if (isDesktop) {
-            WindowManager.instance.setTitle("Finamp");
+            WindowManager.instance.setTitle("Extify");
           }
           return;
         }
@@ -110,7 +110,7 @@ class PlaybackHistoryService {
           currentItem = item;
         } else {
           if (isDesktop) {
-            WindowManager.instance.setTitle("Finamp");
+            WindowManager.instance.setTitle("Extify");
           }
           return;
         }
@@ -357,7 +357,7 @@ class PlaybackHistoryService {
 
     if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
       WindowManager.instance.setTitle(
-        "${_currentTrack?.item.item.artist != null ? '${_currentTrack?.item.item.artist} - ' : ''}${_currentTrack!.item.item.title} - Finamp",
+        "${_currentTrack?.item.item.artist != null ? '${_currentTrack?.item.item.artist} - ' : ''}${_currentTrack!.item.item.title} - Extify",
       );
     }
   }

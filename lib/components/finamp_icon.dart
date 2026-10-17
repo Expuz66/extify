@@ -1,7 +1,6 @@
 import 'package:finamp/services/finamp_settings_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 
 class FinampIcon extends ConsumerWidget {
   final double height;
@@ -11,7 +10,7 @@ class FinampIcon extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final icon = SvgPicture.asset("images/finamp_cropped.svg", width: width, height: height);
+    final icon = Image.asset("images/extify_logo.png", width: width, height: height);
     final useMonochromeIcon = ref.watch(finampSettingsProvider.useMonochromeIcon);
     if (!useMonochromeIcon && overrideColor == null) return icon;
 

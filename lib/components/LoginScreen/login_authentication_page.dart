@@ -1,14 +1,14 @@
 import 'package:finamp/components/Buttons/cta_medium.dart';
-import 'package:finamp/components/Buttons/simple_button.dart';
 import 'package:finamp/components/finamp_icon.dart';
-import 'package:finamp/components/LoginScreen/login_user_selection_page.dart';
 import 'package:finamp/components/global_snackbar.dart';
 import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/models/jellyfin_models.dart';
+import 'package:finamp/services/app_error_classifier.dart';
 import 'package:finamp/services/jellyfin_api_helper.dart';
 import 'package:flutter/material.dart' hide ConnectionState;
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get_it/get_it.dart';
+import 'package:logging/logging.dart';
 
 import 'login_flow.dart';
 
@@ -25,6 +25,8 @@ class LoginAuthenticationPage extends StatefulWidget {
 }
 
 class _LoginAuthenticationPageState extends State<LoginAuthenticationPage> {
+  static final _logger = Logger("LoginAuthenticationPage");
+
   final jellyfinApiHelper = GetIt.instance<JellyfinApiHelper>();
 
   String? username;
@@ -57,20 +59,6 @@ class _LoginAuthenticationPageState extends State<LoginAuthenticationPage> {
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0, bottom: 12.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: SimpleButton(
-                    icon: TablerIcons.chevron_left,
-                    text: AppLocalizations.of(context)!.backToAccountSelection,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ),
-              ),
-              JellyfinUserWidget(user: widget.connectionState?.selectedUser),
               _buildLoginForm(context),
               const SizedBox(height: 16),
               CTAMedium(
@@ -149,6 +137,11 @@ class _LoginAuthenticationPageState extends State<LoginAuthenticationPage> {
   }
 
   /// Function to handle logging in for Widgets, including a snackbar for errors.
+  ///
+  /// Failures are classified into a friendly, localized message instead of
+  /// surfacing the raw backend error. The exception is only logged in a
+  /// credential-free form; login request bodies are censored by
+  /// `censored_log.dart` before they are stored or exported.
   Future<void> loginHelper({required String username, String? password, required BuildContext context}) async {
     JellyfinApiHelper jellyfinApiHelper = GetIt.instance<JellyfinApiHelper>();
 
@@ -162,7 +155,25 @@ class _LoginAuthenticationPageState extends State<LoginAuthenticationPage> {
       if (!mounted) return;
       widget.onAuthenticated?.call();
     } catch (e) {
-      GlobalSnackbar.error(e);
+      _logger.warning("Login failed: ${describeErrorForLog(e)}");
+
+      // "isAuthenticationRequest: true" is what allows a 401 to be reported as
+      // wrong credentials; the same status from any other endpoint is not.
+      final errorKind = await classifyApiErrorWithConnectivity(e, isAuthenticationRequest: true);
+
+      GlobalSnackbar.message(
+        (scaffoldContext) => appErrorDisplayText(AppLocalizations.of(scaffoldContext)!, errorKind),
+        action: appErrorIsRetryable(errorKind)
+            ? (scaffoldContext) => SnackBarAction(
+                label: AppLocalizations.of(scaffoldContext)!.tryAgain,
+                // Retry the original login attempt. Guarded so a retry after the
+                // page was disposed does nothing.
+                onPressed: () {
+                  if (mounted) sendForm();
+                },
+              )
+            : null,
+      );
 
       // We return here to stop the function from continuing.
       return;

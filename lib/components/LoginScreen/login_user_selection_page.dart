@@ -262,7 +262,7 @@ class JellyfinUserWidget extends StatelessWidget {
             decoration: BoxDecoration(
               color: Theme.brightnessOf(context) == Brightness.dark ? Colors.white : Colors.black,
             ),
-            child: Image.asset('images/finamp.png', width: avatarSize, height: avatarSize),
+            child: Image.asset('images/extify_logo.png', width: avatarSize, height: avatarSize),
           );
         }
       } else {

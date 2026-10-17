@@ -59,13 +59,13 @@ import 'package:finamp/services/queue_service.dart';
 import 'package:finamp/services/theme_provider.dart';
 import 'package:finamp/services/ui_overlay_setter_observer.dart';
 import 'package:finamp/services/widget_bindings_observer_provider.dart';
+import 'package:finamp/utils/supported_locales.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:flutter_user_certificates_android/flutter_user_certificates_android.dart';
 import 'package:gaimon/gaimon.dart';
@@ -440,7 +440,7 @@ Future<void> _setupPlaybackServices() async {
     builder: () => MusicPlayerBackgroundTask(),
     config: AudioServiceConfig(
       androidStopForegroundOnPause: FinampSettingsHelper.finampSettings.androidStopForegroundOnPause,
-      androidNotificationChannelName: "Finamp",
+      androidNotificationChannelName: "Extify",
       androidNotificationIcon: "mipmap/white",
       androidNotificationChannelId: "com.unicornsonlsd.finamp.audio",
       // notificationColor: TODO use the theme color for older versions of Android,
@@ -971,7 +971,7 @@ class FinampApp extends ConsumerWidget {
           )
         : null;
     return MaterialApp(
-      title: "Finamp",
+      title: "Extify",
       routes: {
         SplashScreen.routeName: (context) => const SplashScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),
@@ -1065,12 +1065,11 @@ class FinampApp extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: AppLocalizations.supportedLocales,
-      // We awkwardly put English as the first supported locale so
-      // that basicLocaleListResolution falls back to it instead of
-      // the first language in supportedLocales (Arabic as of writing)
-      localeListResolutionCallback: (locales, supportedLocales) =>
-          basicLocaleListResolution(locales, [const Locale("en")].followedBy(supportedLocales)),
+      supportedLocales: extifySupportedLocales,
+      // Extify only ships English and Indonesian. Keeping English first means
+      // basicLocaleListResolution falls back to it for any other device
+      // language instead of to an unsupported locale.
+      localeListResolutionCallback: (locales, _) => basicLocaleListResolution(locales, extifySupportedLocales),
       locale: locale,
       scaffoldMessengerKey: GlobalSnackbar.rawMaterialAppScaffoldKey,
       navigatorKey: GlobalSnackbar.rawMaterialAppNavigatorKey,
@@ -1089,7 +1088,7 @@ class FinampErrorApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Finamp",
+      title: "Extify",
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -1098,7 +1097,7 @@ class FinampErrorApp extends StatelessWidget {
       ],
       theme: ThemeData(brightness: Brightness.light, colorScheme: lightColorScheme),
       darkTheme: ThemeData(brightness: Brightness.dark, colorScheme: darkColorScheme),
-      supportedLocales: AppLocalizations.supportedLocales,
+      supportedLocales: extifySupportedLocales,
       home: ErrorScreen(error: error, trace: trace),
       scaffoldMessengerKey: GlobalSnackbar.rawMaterialAppScaffoldKey,
       navigatorKey: GlobalSnackbar.rawMaterialAppNavigatorKey,
@@ -1122,7 +1121,7 @@ class ErrorScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Hero(tag: "finamp_logo", child: SvgPicture.asset('images/finamp_cropped.svg', width: 75, height: 75)),
+              Hero(tag: "finamp_logo", child: Image.asset('images/extify_logo.png', width: 75, height: 75)),
               const SizedBox(height: 16.0),
               Text.rich(
                 TextSpan(

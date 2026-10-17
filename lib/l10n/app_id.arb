@@ -209,7 +209,7 @@
     "sortOrder": "Urutan",
     "sortBy": "Urutkan berdasarkan",
     "title": "Judul",
-    "finamp": "Finamp",
+    "finamp": "Extify",
     "@finamp": {
         "description": "App name, possibly translated"
     },
@@ -469,7 +469,7 @@
     "@playbackSpeedControlSettingSubtitle": {
         "description": "Subtitle for the playback speed visibility setting"
     },
-    "playbackSpeedControlSettingDescription": "Otomatis:\nFinamp mencoba mengidentifikasi apakah trek yang Anda putar adalah podcast atau (bagian dari) buku audio. Ini dianggap demikian jika trek lebih panjang dari {trackDuration} menit, jika album trek tersebut lebih panjang dari {albumDuration} jam, atau jika trek memiliki setidaknya satu genre berikut: {genreList}\nKontrol kecepatan pemutaran kemudian akan ditampilkan di menu layar pemutar.\n\nDitampilkan:\nKontrol kecepatan pemutaran akan selalu ditampilkan di menu layar pemutar.\n\nDisembunyikan:\nKontrol kecepatan pemutaran di menu layar pemutar selalu disembunyikan.",
+    "playbackSpeedControlSettingDescription": "Otomatis:\nExtify mencoba mengidentifikasi apakah trek yang Anda putar adalah podcast atau (bagian dari) buku audio. Ini dianggap demikian jika trek lebih panjang dari {trackDuration} menit, jika album trek tersebut lebih panjang dari {albumDuration} jam, atau jika trek memiliki setidaknya satu genre berikut: {genreList}\nKontrol kecepatan pemutaran kemudian akan ditampilkan di menu layar pemutar.\n\nDitampilkan:\nKontrol kecepatan pemutaran akan selalu ditampilkan di menu layar pemutar.\n\nDisembunyikan:\nKontrol kecepatan pemutaran di menu layar pemutar selalu disembunyikan.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -713,6 +713,14 @@
             }
         }
     },
+    "errorNoInternetConnection": "Tidak ada koneksi internet",
+    "errorNoInternetConnectionBody": "Periksa koneksi internet kamu, lalu coba lagi.",
+    "errorIncorrectCredentials": "Username atau password salah",
+    "errorIncorrectCredentialsBody": "Periksa kembali detail login kamu, lalu coba lagi.",
+    "errorUnableToConnectToServer": "Tidak dapat terhubung ke server",
+    "errorServerTemporarilyUnavailable": "Server sementara tidak tersedia",
+    "errorSomethingWentWrong": "Terjadi kesalahan. Silakan coba lagi.",
+    "tryAgain": "Coba lagi",
     "removeFromMix": "Hapus dari Mix",
     "addToMix": "Tambahkan ke Mix",
     "startRadio": "Mulai Radio",
@@ -1030,7 +1038,7 @@
     "@reportQueueToServer": {
         "description": "Label for the setting that toggles reporting of the current queue to the Jellyfin server"
     },
-    "reportQueueToServerSubtitle": "Jika diaktifkan, Finamp akan mengirim antrean saat ini ke server. Ini dapat meningkatkan kontrol jarak jauh dan memungkinkan pemulihan antrean dari sisi server. Selalu aktif jika fitur 'Play On' diaktifkan.",
+    "reportQueueToServerSubtitle": "Jika diaktifkan, Extify akan mengirim antrean saat ini ke server. Ini dapat meningkatkan kontrol jarak jauh dan memungkinkan pemulihan antrean dari sisi server. Selalu aktif jika fitur 'Play On' diaktifkan.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1058,7 +1066,7 @@
     "@enablePlayonTitle": {
         "description": "Label for the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
-    "enablePlayonSubtitle": "Mengaktifkan fitur 'Play On' Jellyfin (mengendalikan Finamp dari jarak jauh melalui client lain). Nonaktifkan ini jika reverse proxy atau server Anda tidak mendukung websocket.",
+    "enablePlayonSubtitle": "Mengaktifkan fitur 'Play On' Jellyfin (mengendalikan Extify dari jarak jauh melalui client lain). Nonaktifkan ini jika reverse proxy atau server Anda tidak mendukung websocket.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1244,7 +1252,7 @@
     "@noMusicLibrariesTitle": {
         "description": "Title for message that shows on the views screen when no music libraries could be found."
     },
-    "noMusicLibrariesBody": "Finamp tidak dapat menemukan pustaka musik apa pun. Pastikan server Jellyfin Anda berisi setidaknya satu pustaka dengan jenis konten diatur ke \"Musik\".",
+    "noMusicLibrariesBody": "Extify tidak dapat menemukan pustaka musik apa pun. Pastikan server Jellyfin Anda berisi setidaknya satu pustaka dengan jenis konten diatur ke \"Musik\".",
     "refresh": "Segarkan",
     "moreInfo": "Info lebih lanjut",
     "volumeNormalizationSettingsTitle": "Normalisasi volume",
@@ -2301,7 +2309,7 @@
     "@autoReloadQueueTitle": {
         "description": "Title for the setting that controls if the queue is automatically reloaded when the source changes"
     },
-    "autoReloadQueueSubtitle": "Otomatis Memuat Ulang Antrean ketika sumber berubah (misal: mode offline diaktifkan atau alamat server berubah). Jika nonaktif, Finamp akan menampilkan pesan kepada Anda.",
+    "autoReloadQueueSubtitle": "Otomatis Memuat Ulang Antrean ketika sumber berubah (misal: mode offline diaktifkan atau alamat server berubah). Jika nonaktif, Extify akan menampilkan pesan kepada Anda.",
     "@autoReloadQueueSubtitle": {
         "description": "Subtitle for the setting that controls if the queue is automatically reloaded when the source changes"
     },
@@ -2535,7 +2543,7 @@
     "@serverSharingMenuButtonTitle": {
         "description": "Title for the button in the drawer that opens the server sharing menu"
     },
-    "serverSharingMenuConfirmationDialogText": "Apakah anda yakin ingin mengaktifkan berbagi server meskipun anda berada dalam Mode Offline? Tindakan ini akan membuat Finamp mengirimkan data melalui jaringan lokal.",
+    "serverSharingMenuConfirmationDialogText": "Apakah anda yakin ingin mengaktifkan berbagi server meskipun anda berada dalam Mode Offline? Tindakan ini akan membuat Extify mengirimkan data melalui jaringan lokal.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -2563,7 +2571,7 @@
     "@serverSharingMenuDescription": {
         "description": "Description text shown in the server sharing menu, right below the controls"
     },
-    "serverSharingMenuDetails": "Ini bekerja dengan mendengarkan permintaan penemuan server dari client lain di jaringan lokal, lalu membalas permintaan tersebut dengan alamat server Jellyfin Anda yang telah dikonfigurasi.\nJika Anda mengonfigurasi alamat lokal dan publik, Finamp akan memberikan keduanya kepada client yang meminta.",
+    "serverSharingMenuDetails": "Ini bekerja dengan mendengarkan permintaan penemuan server dari client lain di jaringan lokal, lalu membalas permintaan tersebut dengan alamat server Jellyfin Anda yang telah dikonfigurasi.\nJika Anda mengonfigurasi alamat lokal dan publik, Extify akan memberikan keduanya kepada client yang meminta.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -2603,7 +2611,7 @@
     "@quickConnectAuthorizationMenuStateSubtitleFailed": {
         "description": "Subtitle for the quick connect authorization menu state info (above the input field) when the authorization was unsuccessful"
     },
-    "quickConnectAuthorizationMenuDescription": "Jika Anda mencoba masuk ke client Jellyfin lain melalui Quick Connect, Anda dapat memasukkan atau menempelkan kode 6 digit ke kolom di atas. Ini akan mengotorisasikan permintaan masuk dari client lain, dan membuat Anda masuk ke akun yang sama dengan yang Anda gunakan untuk Finamp.",
+    "quickConnectAuthorizationMenuDescription": "Jika Anda mencoba masuk ke client Jellyfin lain melalui Quick Connect, Anda dapat memasukkan atau menempelkan kode 6 digit ke kolom di atas. Ini akan mengotorisasikan permintaan masuk dari client lain, dan membuat Anda masuk ke akun yang sama dengan yang Anda gunakan untuk Extify.",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },
@@ -2643,15 +2651,15 @@
     "@discordRPCIconSettingDescription": {
         "description": "Description for the setting that controls which Icon the discord RPC displays as a Fallback in case no public address is detected (it doenst matter what connection is active)."
     },
-    "discordRPCIconDark": "Finamp - Gelap",
+    "discordRPCIconDark": "Extify - Gelap",
     "@discordRPCIconDark": {
         "description": "A REALLY short description of the icon in use. Its format is 'ICON, BACKGROUND'. This one is the Finamp logo with the Dark-Theme Background"
     },
-    "discordRPCIconBlack": "Finamp - Hitam",
+    "discordRPCIconBlack": "Extify - Hitam",
     "@discordRPCIconBlack": {
         "description": "A REALLY short description of the icon in use. Its format is 'ICON, BACKGROUND'. This one is the Finamp logo with a Black Background"
     },
-    "discordRPCIconLight": "Finamp - Putih",
+    "discordRPCIconLight": "Extify - Putih",
     "@discordRPCIconLight": {
         "description": "A REALLY short description of the icon in use. Its format is 'ICON, BACKGROUND'. This one is the Finamp logo with a White Background"
     },
@@ -2659,11 +2667,11 @@
     "@discordRPCIconJFTransparent": {
         "description": "A REALLY short description of the icon in use. Its format is 'ICON, BACKGROUND'. This one is the Jellyfin logo with a Transparent Background"
     },
-    "discordRPCIconTransparent": "Finamp - Transparan",
+    "discordRPCIconTransparent": "Extify - Transparan",
     "@discordRPCIconTransparent": {
         "description": "A REALLY short description of the icon in use. Its format is 'ICON, BACKGROUND'. This one is the Finamp logo with a Transparent Background"
     },
-    "discordRPCIconWhiteTransparent": "Finamp Putih - Transparan",
+    "discordRPCIconWhiteTransparent": "Extify Putih - Transparan",
     "@discordRPCIconWhiteTransparent": {
         "description": "A REALLY short description of the icon in use. Its format is 'ICON, BACKGROUND'. This one is the full white Finamp logo with a Transparent Background"
     },
@@ -2748,7 +2756,7 @@
     "@autoplayRestoredQueueSubtitle": {
         "description": "Subtitle for the setting that controls if restored queues automatically play."
     },
-    "missingBlurhashWarning": "Peringatan: Server Jellyfin tampaknya salah dikonfigurasi dan tidak menghitung blurhash. Ini mencegah Finamp menghilangkan duplikasi unduhan gambar. Silakan perbaiki server lalu jalankan perbaikan unduhan.",
+    "missingBlurhashWarning": "Peringatan: Server Jellyfin tampaknya salah dikonfigurasi dan tidak menghitung blurhash. Ini mencegah Extify menghilangkan duplikasi unduhan gambar. Silakan perbaiki server lalu jalankan perbaikan unduhan.",
     "@missingBlurhashWarning": {
         "description": "A warning message displayed on the downloads screen if the jellyfin server is missing blurhashes."
     },
@@ -3470,11 +3478,11 @@
     "@voiceSearch": {
         "description": "Heading for the page that prompts the user to perform a voice search."
     },
-    "carPlaySiriHint": "Ucapkan \"Hey Siri, putar [track/artis/album] di Finamp\"",
+    "carPlaySiriHint": "Ucapkan \"Hey Siri, putar [track/artis/album] di Extify\"",
     "@carPlaySiriHint": {
         "description": "Hint text for how to use Siri to search in CarPlay."
     },
-    "carPlayLoginPrompt": "Buka aplikasi Finamp di ponsel Anda untuk masuk ke server Jellyfin Anda.",
+    "carPlayLoginPrompt": "Buka aplikasi Extify di ponsel Anda untuk masuk ke server Jellyfin Anda.",
     "@carPlayLoginPrompt": {
         "description": "Label shown when the user is trying to use CarPlay without being logged in."
     },
@@ -3715,7 +3723,7 @@
     "perTabGridModeScreen": "Atur tipe tampilan per-tab",
     "perTabAlbumGrid": "Album hanya dalam bentuk kisi",
     "quickSettingsScreen": "Pengaturan Cepat",
-    "quickSettingsScreenDescription": "Atur Finamp sesuai keinginan anda dengan pilihan utama berikut. Kembali ke sini kapan saja via Pengaturan.",
+    "quickSettingsScreenDescription": "Atur Extify sesuai keinginan anda dengan pilihan utama berikut. Kembali ke sini kapan saja via Pengaturan.",
     "quickSettingsTabsLink": "Atur ulang dan sembunyikan tab",
     "quickSettingsTranscodeLink": "Semua pengaturan transcoding",
     "quickSettingsLayoutLink": "Semua pengaturan tata letak dan tema",
