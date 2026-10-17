@@ -1,0 +1,43 @@
+import 'package:finamp/components/SettingsScreen/finamp_settings_dropdown.dart';
+import 'package:finamp/l10n/app_localizations.dart';
+import 'package:finamp/models/finamp_models.dart';
+import 'package:finamp/services/finamp_settings_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class DiscordRpcIconSelector extends ConsumerWidget {
+  const DiscordRpcIconSelector({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    DiscordRpcIcon option = ref.watch(finampSettingsProvider.rpcIcon);
+
+    return ListTile(
+      title: Text(AppLocalizations.of(context)!.discordRPCIconSettingTitle),
+      subtitle: Column(
+        spacing: 4.0,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(AppLocalizations.of(context)!.discordRPCIconSettingDescription),
+          FinampSettingsDropdown<DiscordRpcIcon>(
+            dropdownItems: DiscordRpcIcon.values
+                .map(
+                  (e) => DropdownMenuEntry<DiscordRpcIcon>(
+                    value: e,
+                    label: e.toLocalisedString(context),
+                    leadingIcon: Image.asset(e.toImage(), width: 32, height: 32),
+                  ),
+                )
+                .toList(),
+            selectedValue: option,
+            onSelected: (value) {
+              if (value != null) {
+                FinampSetters.setRpcIcon(value);
+              }
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}

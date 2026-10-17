@@ -1,0 +1,211 @@
+{
+    "@@locale": "szl",
+    "serverUrl": "Adresa URL ôd serwera",
+    "username": "Miano ôd używocza",
+    "password": "Hasło",
+    "next": "Dalij",
+    "selectMusicLibraries": "Wybier bibliotyki ze muzykōm",
+    "@selectMusicLibraries": {
+        "description": "App bar title for library select screen"
+    },
+    "unknownName": "Niyznōme miano",
+    "tracks": "Śpiywki",
+    "albums": "Albumy",
+    "artists": "Artyścio",
+    "genres": "Gatōnki",
+    "startMixNoTracksArtist": "Prziciś dugo na artysty, żeby go dodać abo wymazać ze budowanio miksu, podwiela go puścisz",
+    "@startMixNoTracksArtist": {
+        "description": "Snackbar message that shows when the user presses the instant mix button with no artists selected"
+    },
+    "music": "Muzyka",
+    "internalExternalIpExplanation": "Jeźli chcesz mieć zdalny przistymp do swojigo serwera Jellyfin, to potrzebujesz zewnyntrznego IP..\n\nJeźli twōj serwer je na porcie HTTP (80/443), to niy musisz podować portu. Tak nojczyńścij je, jak serwer je za reverse proxy.",
+    "@internalExternalIpExplanation": {
+        "description": "Extra info for which IP to use for remote access, and info on whether or not the user needs to specify a port."
+    },
+    "dateAdded": "Data dodanio",
+    "dlRunning": "{count} two",
+    "@dlRunning": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "required": "Wymogane",
+    "playlistUpdated": "Miano ôd playlisty spamiyntane.",
+    "addDownloads": "Dodej pobrane",
+    "message": "Wiadōmość",
+    "stackTrace": "Ślod stōsa",
+    "notAvailableInOfflineMode": "Niyprzistympne we trybie offline",
+    "logOut": "Ôdloguj",
+    "customLocationsBuggy": "Ze włosnymi lokacyjami je moc problymōw skuli turbacyji ze uprawniyniami. Sōm rozwożane spōsoby sprawiynio tego, ale teroz jejich używanie niy ma rekōmyndowane.",
+    "enterLowPriorityStateOnPause": "Przi pauzie przejdź we stōn niskigo priorytetu",
+    "enterLowPriorityStateOnPauseSubtitle": "Kej to je włōnczōne, to powiadōmiynie może być ôdpōnkniynte przi pauzie. Włōnczynie tego przizwolo tyż Androidowi zabic usuga przi pauzie.",
+    "shuffleAllTrackCount": "Liczba śpiywek przi miyszaniu wszyskich",
+    "shuffleAllTrackCountSubtitle": "Liczba śpiywek do zaladowanio po użyciu knefla miyszanio wszyskich śpiywek.",
+    "viewType": "Widok",
+    "viewTypeSubtitle": "Widok panelu muzyki",
+    "list": "Lista",
+    "grid": "Krotka",
+    "yesButtonLabel": "JA",
+    "noButtonLabel": "NIY",
+    "noAlbum": "Brak albumu",
+    "noItem": "Brak elymyntu",
+    "unknownArtist": "Niyznōmy artysta",
+    "emptyServerUrl": "Adresa URL ôd serwera niy może być prōzno",
+    "@emptyServerUrl": {
+        "description": "Error message that shows when the user submits a login without a server URL"
+    },
+    "playlists": "Playlisty",
+    "logs": "Logi",
+    "startMix": "Zacznij mix",
+    "premiereDate": "Datōm prymiery",
+    "startMixNoTracksAlbum": "Prziciś dugo na album, żeby go dodać abo wymazać ze budowanio miksu, podwiela go puścisz",
+    "@startMixNoTracksAlbum": {
+        "description": "Snackbar message that shows when the user presses the instant mix button with no albums selected"
+    },
+    "clear": "Wysnoż",
+    "shuffleAll": "Miyszej wszysko",
+    "albumArtist": "Artysta albumu",
+    "artist": "Artysta",
+    "finamp": "Finamp",
+    "downloads": "Pobrane",
+    "settings": "Sztalōnki",
+    "offlineMode": "Tryb offline",
+    "sortOrder": "Porzōndek zortowanio",
+    "sortBy": "Zortuj podug",
+    "album": "Album",
+    "budget": "Budżet",
+    "communityRating": "Ôcyna ôd społeczności",
+    "random": "Lōsowo",
+    "criticRating": "Ôcyna ôd krytykōw",
+    "playCount": "Liczba grań",
+    "datePlayed": "Datōm granio",
+    "productionYear": "Rok produkcyje",
+    "downloadCount": "{count,plural, =1{{count} pobranie} other{{count} pobrań}}",
+    "@downloadCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "trackCount": "{count,plural,=1{{count} śpiywka} other{{count} śpiywek}}",
+    "@trackCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "downloadsQueued": "Pobrane dodane.",
+    "unknownError": "Niyznōmy feler",
+    "name": "Nazwa",
+    "revenue": "Dochōd",
+    "error": "Feler",
+    "discNumber": "Dysk {number}",
+    "@discNumber": {
+        "placeholders": {
+            "number": {
+                "type": "int"
+            }
+        }
+    },
+    "playButtonLabel": "GREJ",
+    "layoutAndTheme": "Ukłod i tymat",
+    "dlComplete": "{count} podarzōne",
+    "@dlComplete": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dlEnqueued": "{count} we raji",
+    "@dlEnqueued": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "logsCopied": "Logi skopiowane.",
+    "customLocation": "Włosno lokacyjo",
+    "selectDirectory": "Wybier katalog",
+    "dlFailed": "{count} niypodarzōne",
+    "@dlFailed": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "errorScreenError": "Doszło do feleru przi pobiyraniu wykazu felerōw! We takim przipodku chyba nojlepij to zgłosić na GitHubie i skasować dane ôd aplikacyje",
+    "shuffleButtonLabel": "LŌSOWO",
+    "audioService": "Usuga audio",
+    "enableTranscodingSubtitle": "Jeźli zaznaczōne, to strumiynie muzyki bydōm transkodowane na serwerze.",
+    "addDownloadLocation": "Dodej lokacyjo pobiyranio",
+    "location": "Lokalizacyjo",
+    "addButtonLabel": "DODEJ",
+    "shareLogs": "Podziel sie logami",
+    "applicationLegalese": "Na licyncyji Mozilla Public License 2.0. Zdrzōdłowy kod je przistympny na:\n\ngithub.com/jmshrv/finamp",
+    "transcoding": "Transkodowanie",
+    "downloadLocations": "Lokacyje pobiyranio",
+    "areYouSure": "Na zicher?",
+    "enableTranscoding": "Włōncz transkodowanie",
+    "bitrate": "Bitrate",
+    "bitrateSubtitle": "Wyższy bitrate dowo wyższo jakość audio kosztym srogszego transferu danych.",
+    "appDirectory": "Katalog ôd aplikacyje",
+    "pathReturnSlashErrorMessage": "Ściyżek, co skazujōm „/”, niy idzie używać",
+    "landscape": "Poziōmo",
+    "showTextOnGridView": "Pokazuj tekst we widoku krotki",
+    "showTextOnGridViewSubtitle": "Sztaluje, jeźli pokazować tekst (tytuł, artysta itd.) we panelu krotki elymyntōw.",
+    "useCoverAsBackground": "Pokazuj rozmazano ôkładzina za tło ôd przegrowacza",
+    "useCoverAsBackgroundSubtitle": "Sztaluje, jeźli pokazować rozmazano ôkładzina za tło ôd przegrowacza.",
+    "theme": "Tymat",
+    "system": "Systymowy",
+    "light": "Jasny",
+    "tabs": "Zokłodki",
+    "dark": "Ciymny",
+    "queue": "Raja",
+    "cancelSleepTimer": "Ôdwołać ôdliczanie do zastawiynio?",
+    "createButtonLabel": "STWŌRZ",
+    "playlistCreated": "Playlista stworzōno.",
+    "instantMix": "Wartki mix",
+    "anErrorHasOccured": "Doszło do feleru.",
+    "responseError": "{error} Kod statusu {statusCode}.",
+    "@responseError": {
+        "placeholders": {
+            "error": {
+                "type": "String",
+                "example": "Forbidden"
+            },
+            "statusCode": {
+                "type": "int",
+                "example": "403"
+            }
+        }
+    },
+    "sleepTimerTooltip": "Ôdliczanie do zastawiynio",
+    "addToPlaylistTooltip": "Dodej do playlisty",
+    "addToPlaylistTitle": "Dodej do playlisty",
+    "newPlaylist": "Nowo playlista",
+    "addToQueue": "Dodej do raje",
+    "goToAlbum": "Idź do albumu",
+    "startingInstantMix": "Zaczynanie wartkigo miksu.",
+    "addToMix": "Dodej do miksu",
+    "responseError401": "{error} Kod statusu {statusCode}. To bezma ôznaczo, że było użyto niynoleżne miano ôd używocza abo hasło, abo tyż twōj kliynt już niy ma autoryzowany.",
+    "@responseError401": {
+        "placeholders": {
+            "error": {
+                "type": "String",
+                "example": "Unauthorized"
+            },
+            "statusCode": {
+                "type": "int",
+                "example": "401"
+            }
+        }
+    },
+    "removeFromMix": "Wymaż ze miksu"
+}

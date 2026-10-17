@@ -1,0 +1,31 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+def rootBuildDir = rootProject.layout.buildDirectory.get().dir('../../build')
+rootProject.layout.buildDirectory.value(rootBuildDir)
+subprojects {
+    def subProjectBuildDir = rootBuildDir.dir(project.name)
+    project.layout.buildDirectory.value(subProjectBuildDir)
+}
+subprojects {
+    afterEvaluate { project ->
+        if (project.plugins.hasPlugin("com.android.application") ||
+                project.plugins.hasPlugin("com.android.library")) {
+            project.android {
+                compileSdkVersion flutter.compileSdkVersion
+                buildToolsVersion "36.0.0"
+            }
+        }
+    }
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.layout.buildDirectory
+}

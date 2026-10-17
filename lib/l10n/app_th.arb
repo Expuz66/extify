@@ -1,0 +1,233 @@
+{
+    "useCoverAsBackgroundSubtitle": "แสดงหรือไม่แสดงภาพเบลอของปกเพลงเป็นพื้นหลังของตัวเล่นเพลง",
+    "music": "เพลง",
+    "clear": "เคลียร์",
+    "minutes": "นาที",
+    "sleepTimerTooltip": "ตั้งเวลาปิด",
+    "addToPlaylistTitle": "เพิ่มไปยังเพลย์ลิสต์",
+    "newPlaylist": "สร้างเพลย์ลิสต์ใหม่",
+    "responseError": "{error} รหัสข้อผิดพลาด {statusCode}",
+    "@responseError": {
+        "placeholders": {
+            "error": {
+                "type": "String",
+                "example": "Forbidden"
+            },
+            "statusCode": {
+                "type": "int",
+                "example": "403"
+            }
+        }
+    },
+    "serverUrl": "URL ของเซิร์ฟเวอร์",
+    "logs": "ล็อก",
+    "next": "ถัดไป",
+    "selectMusicLibraries": "เลือกคลังเพลง",
+    "@selectMusicLibraries": {
+        "description": "App bar title for library select screen"
+    },
+    "artists": "ศิลปิน",
+    "genres": "แนวเพลง",
+    "startMixNoTracksAlbum": "แตะค้างที่อัลบั้มเพื่อเพิ่มหรือนำออกจากตัวสร้างมิกซ์ก่อนที่จะเริ่มมิกซ์",
+    "@startMixNoTracksAlbum": {
+        "description": "Snackbar message that shows when the user presses the instant mix button with no albums selected"
+    },
+    "albumArtist": "ศิลปินของอัลบั้ม",
+    "artist": "ศิลปิน",
+    "budget": "งบ",
+    "communityRating": "เรตติ้งจากชุมชน",
+    "criticRating": "เรตติ้งจาก Critic",
+    "datePlayed": "วันที่เล่น",
+    "premiereDate": "วันที่เปิดตัว",
+    "productionYear": "ปีที่สร้าง",
+    "name": "ชื่อ",
+    "revenue": "รายได้",
+    "downloadCount": "{count,plural, =1{ดาวน์โหลดแล้ว {count}} other{ดาวน์โหลดแล้ว {count}}}",
+    "@downloadCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dlComplete": "เสร็จแล้ว {count}",
+    "@dlComplete": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dlFailed": "ล้มเหลว {count}",
+    "@dlFailed": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dlEnqueued": "เข้าคิว {count}",
+    "@dlEnqueued": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "addDownloads": "เพิ่มการดาวน์โหลด",
+    "location": "สถานที่",
+    "downloadsQueued": "เพิ่มการดาวน์โหลดแล้ว",
+    "addButtonLabel": "เพิ่ม",
+    "shareLogs": "แชร์ล็อก",
+    "logsCopied": "คัดลอกล็อกแล้ว",
+    "transcoding": "การแปลงไฟล์",
+    "downloadLocations": "ตำแหน่งที่ดาวน์โหลด",
+    "audioService": "บริการเสียง",
+    "stackTrace": "ตามรอย",
+    "layoutAndTheme": "หน้าตา และ ธีม",
+    "notAvailableInOfflineMode": "ไม่พร้อมใช้งานในโหมดออฟไลน์",
+    "enableTranscoding": "เปิดใช้งานการแปลงไฟล์",
+    "enableTranscodingSubtitle": "การแปลงไฟล์เพลงจะถูกดำเนินการจากฝั่งเซิร์ฟเวอร์",
+    "bitrate": "บิทเรต",
+    "customLocation": "ตำแหน่งแบบเลือกเอง",
+    "appDirectory": "โฟลเดอร์ของแอป",
+    "enterLowPriorityStateOnPause": "เมื่อหยุดพักจะเข้าสู่โหมดความสำคัญต่ำ",
+    "shuffleAllTrackCount": "จำนวนครั้งที่สุ่มเพลงทั้งหมด",
+    "shuffleAllTrackCountSubtitle": "จำนวนเพลงที่โหลดขึ้นมาเมื่อใช้ปุ่ม สุ่มทั้งหมด",
+    "viewTypeSubtitle": "ประเภทการแสดงผลของหน้าจอเพลง",
+    "list": "รายการ",
+    "grid": "ตาราง",
+    "landscape": "แนวนอน",
+    "showTextOnGridView": "แสดงตัวอักษรในโหมดตาราง",
+    "useCoverAsBackground": "แสดงภาพเบลอของปกเพลงเป็นภาพพื้นหลังของตัวเล่นเพลง",
+    "disableGesture": "ปิดการใช้งาน gestures",
+    "disableGestureSubtitle": "ใช้หรือไม่ใช้งาน gestures",
+    "theme": "ธีม",
+    "system": "ตามระบบ",
+    "light": "สว่าง",
+    "dark": "มืด",
+    "tabs": "แท็บ",
+    "cancelSleepTimer": "ยกเลิกการตั้งเวลาปิด?",
+    "yesButtonLabel": "ใช่",
+    "noButtonLabel": "ไม่ใช่",
+    "addToPlaylistTooltip": "เพิ่มไปยังเพลย์ลิสต์",
+    "removeFromPlaylistTooltip": "นำออกจากเพลย์ลิสต์",
+    "removeFromPlaylistTitle": "นำออกจากเพลย์ลิสต์",
+    "createButtonLabel": "สร้าง",
+    "playlistCreated": "สร้างเพลย์ลิสต์แล้ว",
+    "noAlbum": "ไม่มีอัลบั้ม",
+    "noItem": "ไม่มีรายการ",
+    "unknownArtist": "ศิลปินที่ไม่รู้จัก",
+    "queue": "คิว",
+    "addToQueue": "เพิ่มไปยังคิว",
+    "instantMix": "มิกซ์ทันที",
+    "goToAlbum": "ไปยังอัลบั้ม",
+    "removedFromPlaylist": "นำออกจากเพลย์ลิสต์แล้ว",
+    "startingInstantMix": "กำลังเริ่มมิกซ์ทันที",
+    "anErrorHasOccured": "พบข้อผิดพลาด",
+    "removeFromMix": "นำออกจากมิกซ์",
+    "settings": "ตั้งค่า",
+    "addToMix": "เพิ่มไปยังมิกซ์",
+    "bufferDuration": "ระยะเวลาที่บัฟเฟอร์",
+    "language": "ภาษา",
+    "offlineMode": "โหมดออฟไลน์",
+    "album": "อัลบั้ม",
+    "selectDirectory": "เลือกโฟลเดอร์",
+    "dateAdded": "วันที่เพิ่ม",
+    "playCount": "จำนวนครั้งที่เล่น",
+    "random": "สุ่ม",
+    "bitrateSubtitle": "บิตเรตที่สูงขึ้นจะช่วยให้เสียงดีขึ้นแต่ก็แลกมาด้วยการใช้งานเน็ตเวิร์กที่มากขึ้น",
+    "trackCount": "{count,plural,=1{{count} เพลง} other{{count} เพลง}}",
+    "@trackCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dlRunning": "กำลังทำงาน {count}",
+    "@dlRunning": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "discNumber": "แผ่นที่ {number}",
+    "@discNumber": {
+        "placeholders": {
+            "number": {
+                "type": "int"
+            }
+        }
+    },
+    "errorScreenError": "พบข้อผิดพลาดในการดึงรายการข้อผิดพลาด! ถ้าถึงขั้นนี้แล้ว คุณน่าจะต้องไปสร้าง Issue บน Github แล้วลบข้อมูลแอปทิ้งซะ",
+    "error": "ผิดพลาด",
+    "playButtonLabel": "เล่น",
+    "required": "จำเป็น",
+    "shuffleButtonLabel": "สุ่ม",
+    "playlistUpdated": "อัปเดตชื่อเพลย์ลิสต์แล้ว",
+    "message": "ข้อความ",
+    "responseError401": "{error} รหัสข้อผิดพลาด {statusCode} เป็นไปได้ว่าคุณอาจจะใช้ ชื่อผู้ใช้หรือรหัสผ่านที่ไม่ถูกต้อง หรือตัวโปรแกรมไม่ได้อยู่ในสถานะล็อกอินแล้ว",
+    "@responseError401": {
+        "placeholders": {
+            "error": {
+                "type": "String",
+                "example": "Unauthorized"
+            },
+            "statusCode": {
+                "type": "int",
+                "example": "401"
+            }
+        }
+    },
+    "applicationLegalese": "สงวนลิขสิทธิ์โดย Mozilla Public License 2.0 สามารถดาวน์โหลด Source Code ได้ที่:\n\ngithub.com/jmshrv/finamp",
+    "logOut": "ออกจากระบบ",
+    "areYouSure": "แน่ใจหรือไม่?",
+    "addDownloadLocation": "เพิ่มตำแหน่งสำหรับดาวน์โหลด",
+    "bufferDurationSubtitle": "ตัวเล่นเพลงควรจะอ่านไฟล์ล่วงหน้าเท่าไร ระบุเป็นวินาที หากเปลี่ยนต้องรีสตาร์ท",
+    "unknownError": "ข้อผิดพลาดที่ไม่รู้จัก",
+    "pathReturnSlashErrorMessage": "ตำแหน่งที่ได้ \"/\" ไม่สามารถใช้ได้",
+    "enterLowPriorityStateOnPauseSubtitle": "ให้แถบแจ้งเตือนสามารถปัดทิ้งไปได้เมื่อหยุดชั่วคราว รวมถึงให้แอนดรอยสามารถปิดเซอร์วิสนี้ได้เมื่อหยุดชั่วคราว",
+    "customLocationsBuggy": "ตำแหน่งแบบเลือกเองนั้นค่อนข้างไม่สเถียรเนื่องจากปัญหาด้านสิทธิ์ ตอนนี้ยังหาวิธีแก้เรื่องนี้อยู่ ทางที่ดีตอนนี้ไม่ค่อยแนะนำให้ใช้ฟีเจอร์นี้",
+    "viewType": "ประเภทการแสดงผล",
+    "internalExternalIpExplanation": "หากคุณต้องการเข้าถึงเซิร์ฟเวอร์ Jellyfin จากภายนอก คุณจำเป็นต้องมี IP ภายนอก\n\nหากเซิร์ฟเวอร์ของคุณรันบนพอร์ต HTTP (80/443) คุณไม่จำเป็นต้องระบุพอร์ต ในเคสนี้เซิร์ฟเวอร์ของคุณอาจจะอยู่หลัง Reverse Proxy",
+    "@internalExternalIpExplanation": {
+        "description": "Extra info for which IP to use for remote access, and info on whether or not the user needs to specify a port."
+    },
+    "emptyServerUrl": "จำเป็นต้องระบุ URL ของเซิร์ฟเวอร์",
+    "@emptyServerUrl": {
+        "description": "Error message that shows when the user submits a login without a server URL"
+    },
+    "username": "ชื่อผู้ใช้",
+    "password": "รหัสผ่าน",
+    "playlists": "เพลย์ลิสต์",
+    "startMixNoTracksArtist": "แตะค้างที่ศิลปินเพื่อเพิ่มหรือนำออกจากตัวสร้างมิกซ์ก่อนที่จะเริ่มมิกซ์",
+    "@startMixNoTracksArtist": {
+        "description": "Snackbar message that shows when the user presses the instant mix button with no artists selected"
+    },
+    "albums": "อัลบั้ม",
+    "downloads": "ดาวน์โหลด",
+    "sortOrder": "เรียงลำดับ",
+    "sortBy": "เรียงด้วย",
+    "unknownName": "ไม่รู้จักชื่อ",
+    "finamp": "ฟินแอมป์",
+    "tracks": "เพลง",
+    "startMix": "เริ่มมิกซ์",
+    "shuffleAll": "สุ่มทั้งหมด",
+    "showTextOnGridViewSubtitle": "แสดงหรือไม่แสดงข้อความ (ชื่อเพลง, ศิลปิน, อื่น ๆ) บนตารางแสดงเพลง",
+    "confirm": "ยืนยัน",
+    "showUncensoredLogMessage": "ล็อกนี้มีข้อมูลการล็อกอินของคุณอยู่ ต้องการให้แสดงใช่ไหม?",
+    "playNext": "เล่นถัดไป",
+    "@playNext": {
+        "description": "Popup menu item title for inserting an item into the play queue after the currently-playing item."
+    },
+    "refresh": "รีเฟชร",
+    "noMusicLibrariesBody": "ฟินแอมป์ไม่พบคลังเพลงใดเลย โปรดตรวจสอบว่าเซิร์ฟเวอร์ของ Jellyfin นั้นมีอย่างน้อยหนึ่งคลังที่ตั้งประเภทของคอนเทนต์ไว้เป็น \"Music\"",
+    "noMusicLibrariesTitle": "ไม่มีคลังเพลง",
+    "@noMusicLibrariesTitle": {
+        "description": "Title for message that shows on the views screen when no music libraries could be found."
+    },
+    "showFastScroller": "แสดงตัวเลื่อนแบบเร็ว",
+    "interactions": "การกระทำ"
+}

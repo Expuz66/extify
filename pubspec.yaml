@@ -1,0 +1,311 @@
+name: finamp
+description: An open source Jellyfin music player
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.1+201
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  background_downloader: ^9.2.3
+  json_annotation: ^4.8.1
+  chopper: ^8.0.0
+  get_it: ^8.2.0
+  # just_audio: ^0.10.5
+  just_audio:
+    # TODO switch back to official just_audio once https://github.com/ryanheise/just_audio/pull/1555 is merged
+    git:
+      url: https://github.com/LennartEnns/just_audio_fork.git
+      ref: 6dfdd07d19f6f037d3f4ff04c397639e4632c687
+      path: just_audio
+  just_audio_media_kit:
+    git:
+      url: https://github.com/Komodo5197/just_audio_media_kit.git
+      ref: feat/queue-shuffle
+
+  media_kit_libs_linux: ^1.2.1
+
+  # Transcoding does not work on windows with current media-kit release.  This fork uses the most recent
+  # build of MPV from https://github.com/zhongfly/mpv-winbuild, which works correctly while transcoding.
+  media_kit_libs_windows_audio: #^1.0.9
+    git:
+      url: https://github.com/Komodo5197/media-kit.git
+      ref: 9659892e095266beffeb71969db733afe9b6c424
+      path: libs/windows/media_kit_libs_windows_audio
+  smtc_windows:
+    git:
+      url: https://github.com/Komodo5197/frb_plugins.git
+      ref: 7ece49cc16a459aaa0718ed23458802533daef37
+      path: packages/smtc_windows/
+  # Despite having loose version constraints, smtc_windows and flutter_discord_rpc actually depend on the
+  # specific version 2.11.1, so we must force it.
+  flutter_rust_bridge: 2.11.1
+
+  audio_service: ^0.18.18
+  audio_service_mpris: ^0.2.0
+  audio_service_platform_interface: ^0.1.3
+  audio_session: ^0.2.2
+  rxdart: ^0.28.0
+  simple_gesture_detector: ^0.2.1
+  path_provider: ^2.0.14
+  hive_ce: ^2.10.1
+  hive_ce_flutter: ^2.2.0
+  file_sizes: ^1.0.6
+  logging: ^1.3.0
+  collection: ^1.18.0
+  clipboard: ^2.0.2
+  archive: ^4.0.9
+  file_picker: ^11.0.2
+  file: ^7.0.1
+  permission_handler: ^12.0.0
+  provider: ^6.0.5
+  uuid: ^4.5.1
+  infinite_scroll_pagination: ^5.0.0
+  flutter_sticky_header: ^0.8.0
+  # TODO: switch to regular `flutter_user_certificates_android` when this PR is
+  # merged:
+  # <https://github.com/johnstef99/flutter_user_certificates_android/pull/2>.
+  flutter_user_certificates_android:
+    git:
+      url: https://github.com/jfly/flutter_user_certificates_android.git
+      ref: db81e4ff3222a7db1308ed03c4bc3142c0d271d5
+  device_info_plus: ^12.1.0
+  package_info_plus: ^9.0.0
+  octo_image: ^2.0.0
+  # Main split view package does not seem actively maintained.  Use fork with ability to specify
+  # handle visual vs grabbable sizes separately.
+  split_view:
+    git:
+      url: https://github.com/odriverobotics/split_view.git
+      ref: 8b2b0f0e1c8470183cb2df40815a05bfdb3fe219
+  share_plus: ^12.0.0
+  isar: ^3.1.0
+  # Use version of isar core with android compilation fixes.  If this version or ref changes,
+  # the linux arm build in upload-assets.yml must be updated.
+  isar_flutter_libs:
+    git:
+      url: https://github.com/Komodo5197/isar_flutter_libs.git
+      ref: 21c20862e94bb33fca9e9c14b5ca72fc41307f4b
+
+  path: ^1.9.0
+  path_provider_platform_interface: ^2.1.2
+  intl: # pinned by flutter version
+  auto_size_text: ^3.0.0
+  marquee: ^2.3.0
+  palette_generator:
+    git:
+      url: https://github.com/jmshrv/packages.git
+      ref: 4992c3b
+      path: packages/palette_generator
+  flutter_tabler_icons: ^1.43.0
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+  locale_names: ^1.1.1
+  flutter_cache_manager: ^3.4.1
+  # fix not showing elipses when maxLines==1
+  balanced_text:
+    git:
+      url: https://github.com/Komodo5197/flutter-balanced-text.git
+      ref: a6e93dad04f650734eaa6fa4d332800c7523b2a7
+  # Use https://github.com/MrJai/flutter_to_airplay/pull/40 to add macOS airplay support
+  flutter_to_airplay:
+    git:
+      url: https://github.com/obiwantoby/flutter_to_airplay.git
+      ref: 2d09182f60fe95529446ee50cc54340827895af9
+  flutter_blurhash: ^0.9.1
+  scroll_to_index: ^3.0.1
+  window_manager: ^0.5.1
+  url_launcher: ^6.3.1
+  wakelock_plus: ^1.2.10
+  battery_plus: ^7.0.0
+  focus_on_it: ^2.0.1
+  flutter_svg: ^2.0.17
+  meta: ^1.15.0
+  analyzer: ^7.0.0
+  build: ^2.4.2
+  source_gen: ^2.0.0
+  web_socket_channel: ^3.0.2
+  connectivity_plus: ^7.0.0
+  progress_border: ^0.1.5
+  visibility_detector: ^0.4.0+2
+  gaimon: ^1.4.0
+  http: ^1.4.0
+  app_links: ^6.4.0
+  flutter_discord_rpc: ^1.0.0
+  shared_preferences: ^2.5.3
+  flex_color_picker: ^3.7.1
+  dynamic_color: ^1.8.1
+  dbus: ^0.7.11
+  bits: ^1.4.0
+  # flutter_carplay fork, based on upstream v1.7.0+2 with the following commits on top:
+  # - fix: decode percent-encoded file URIs before loading images (9cd5078f)
+  # - feat: support SF Symbols as image sources with an optional tint (10cdbc0a)
+  # - feat: add custom Now Playing buttons (78ff7bf3)
+  # - fix: always complete list and image row selections (a80645c6)
+  # - feat: allow a section index title independent of the section header (6c6b4c8f)
+  # - fix: reuse native list items across section updates (e0bb7e07)
+  # - feat: support trailing navigation bar buttons on list templates (c1bd562a)
+  flutter_carplay:
+    git:
+      url: https://github.com/finamp-app/flutter_carplay.git
+      ref: c1bd562a83791c12b681d2161ce77d8af58b34de
+  diacritic: ^0.1.6
+  mini_music_visualizer: ^1.1.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  build_runner: ^2.3.3
+  # 5.14 seems to fail - might need build_runner 2.12?
+  flutter_gen_runner: 5.13.0+1
+  chopper_generator: ^8.0.0
+  flutter_native_splash: ^2.4.7
+  hive_ce_generator: ^1.8.1
+  json_serializable: ^6.9.0
+  flutter_launcher_icons: ^0.14.1
+  flutter_lints: ^6.0.0
+  riverpod_generator: ^2.6.1
+  custom_lint: ^0.7.0
+  riverpod_lint: ^2.6.3
+  # This fork updates isar_generator with analyzer 7.0.0 compatibility
+  isar_generator:
+    git:
+      url: https://github.com/callumw-k/isar.git
+      ref: f070a067378c215b9212a2a22ea593293671c9c9
+      path: packages/isar_generator
+  msix: ^3.16.9
+
+dependency_overrides:
+  # force isar_generator community fork to accept baseline isar.
+  # generated files are identical, so there should be no incompatibilities
+  # fork also allows custom build of linux arm binaries
+  isar:
+    git:
+      url: https://github.com/Komodo5197/isar-community.git
+      ref: a602cd8999048faba043f7e1ce7ba92f4d812762
+      path: packages/isar
+  # Forked audio_service to add:
+  # - iOS MPRemoteCommandCenter registration at configure time
+  # - An iosKeepNowPlayingOnStop config flag
+  # - The iOS playing-state fix from 0.18.20, not yet on pub.dev
+  # These keep Finamp as the system's resume candidate for CarPlay and
+  # Bluetooth reconnects. The flag is part of
+  # audio_service_platform_interface too, so both packages must be
+  # overridden together or the build fails.
+  audio_service:
+    git:
+      url: https://github.com/finamp-app/audio_service.git
+      ref: 77d8a1253cb34ab398e3e7bc364629f46089a897
+      path: audio_service
+  audio_service_platform_interface:
+    git:
+      url: https://github.com/finamp-app/audio_service.git
+      ref: 77d8a1253cb34ab398e3e7bc364629f46089a897
+      path: audio_service_platform_interface
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - images/finamp.png
+    - images/album_white.png
+    - images/finamp_cropped.png
+    - images/finamp_cropped.svg
+    - images/jellyfin-icon-transparent.png
+    - assets/icon/icon_square_bg-black.png # preview image for Discord RPC Fallback Icon Setting
+    - assets/icon/icon_combined.png # preview image for Discord RPC Fallback Icon Setting
+    - assets/icon/icon_square_bg-white.png # preview image for Discord RPC Fallback Icon Setting
+    - images/finamp_cropped.png # preview image for Discord RPC Fallback Icon Setting
+    - assets/icon/icon_white_noborder.png # preview image for Discord RPC Fallback Icon Setting
+    - images/jellyfin-icon-transparent.png # preview image for Discord RPC Fallback Icon Setting
+  #   - images/a_dot_ham.jpeg
+
+  generate: true
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware.
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon_combined.png"
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png"
+  adaptive_icon_background: "#000B25"
+  remove_alpha_ios: true
+  macos:
+    generate: true
+    image_path: "assets/icon/icon_combined_macos.png"
+
+msix_config:
+  display_name: Finamp
+  publisher_display_name: Finamp
+  identity_name: com.unicornsonlsd.finamp
+  msix_version: 1.0.1.0
+  logo_path: ./images/finamp_cropped.png
+  trim_logo: false # don't force logo to be square, it will be stretched
+  # backgroundMediaPlayback prevents apps from getting muted or killed when being in the background (won't build if included at the moment)
+  # internetClient is used to allow access to remote Jellyfin servers through the internet
+  # privateNetworkClientServer is used for local network access, so that Jellyfin servers on the local network can be discovered
+  # musicLibrary is used to get access to the local and nextwork-based music directories (e.g. to store downloads there)
+  # globalMediaControl is used to get full access to the playback sessions (won't build if included at the moment)
+  # more info: https://learn.microsoft.com/en-us/windows/uwp/packaging/app-capability-declarations
+  # capabilities: backgroundMediaPlayback,internetClient,musicLibrary,privateNetworkClientServer,globalMediaControl
+  capabilities: internetClient,musicLibrary,privateNetworkClientServer
+  enable_at_startup: false
+  certificate_path: ./windows/runner/resources/FINAMP_MSIX_LOCAL_CERTIFICATE_NEW.pfx
+  certificate_password: finamp
+  # Building during msix:create is currently bugged, so build manually beforehand.
+  build_windows: false
+  protocol_activation: finamp # the protocols to activate the app

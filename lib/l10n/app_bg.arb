@@ -1,0 +1,462 @@
+{
+    "serverUrl": "URL на сървъра",
+    "emptyServerUrl": "URL адресът на сървъра не може да бъде празен",
+    "@emptyServerUrl": {
+        "description": "Error message that shows when the user submits a login without a server URL"
+    },
+    "username": "Потребителско име",
+    "password": "Парола",
+    "logs": "Логове",
+    "next": "Следващ",
+    "unknownName": "Неизвестно Име",
+    "tracks": "Тракове",
+    "albums": "Албуми",
+    "artists": "Изпълнители",
+    "genres": "Жанрове",
+    "playlists": "Плейлисти",
+    "startMix": "Стартирайте разбъркано възпроизвеждане",
+    "music": "Музика",
+    "clear": "Изчисти",
+    "shuffleAll": "Случайното възпроизвеждане на всички",
+    "finamp": "Finamp",
+    "downloads": "Изтегляния",
+    "settings": "Настройки",
+    "offlineMode": "Офлайн режим",
+    "sortOrder": "Подредба",
+    "sortBy": "Подредба по",
+    "album": "Албум",
+    "artist": "Изпълнител",
+    "albumArtist": "Изпълнител на албума",
+    "budget": "Бюджет",
+    "communityRating": "Обществен рейтинг",
+    "criticRating": "Рейтинг на професионалната общност",
+    "dateAdded": "Дата на добавяне",
+    "datePlayed": "Дата на последно изпълнение",
+    "playCount": "Брой изпълнения",
+    "premiereDate": "Дата на издаване",
+    "name": "Име",
+    "random": "Произволно",
+    "revenue": "Приходи",
+    "dlComplete": "{count} завършено",
+    "@dlComplete": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dlFailed": "{count} грешка",
+    "@dlFailed": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dlEnqueued": "{count} в опашка",
+    "@dlEnqueued": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dlRunning": "{count} изпълнява се",
+    "@dlRunning": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "error": "Грешка",
+    "discNumber": "Диск {number}",
+    "@discNumber": {
+        "placeholders": {
+            "number": {
+                "type": "int"
+            }
+        }
+    },
+    "playButtonLabel": "Пусни",
+    "shuffleButtonLabel": "Разбъркай",
+    "required": "Задължително",
+    "playlistUpdated": "Името на списъка за изпълнение е обновено.",
+    "addDownloads": "Добави за изтегляне",
+    "location": "Местоположение",
+    "shareLogs": "Споделете логовете",
+    "logsCopied": "Логове копирани.",
+    "message": "Съобщение",
+    "stackTrace": "Проследяване на стека",
+    "transcoding": "Транскодиране",
+    "downloadLocations": "Местоположение на изтеглянията",
+    "audioService": "Аудио услуга",
+    "layoutAndTheme": "Оформление и тема",
+    "notAvailableInOfflineMode": "Недостъпно в офлайн режим",
+    "logOut": "Излезте от профила си",
+    "areYouSure": "Сигурни ли сте?",
+    "enableTranscoding": "Активиране на транскодирането",
+    "enableTranscodingSubtitle": "Транскодирането на музикалните потоци се осъществява от страна на сървъра.",
+    "bitrate": "Битрейт",
+    "bitrateSubtitle": "По-високият битрейт дава по-добро качество на звука за сметка на по-висока честотна лента. Не се отнася за кодеци без загуби, напр. FLAC.",
+    "customLocation": "Персонализирано местоположение",
+    "appDirectory": "Директория на приложението",
+    "addDownloadLocation": "Добавете местоположение за изтегляне",
+    "selectDirectory": "Изберете директория",
+    "unknownError": "Неизвестна грешка",
+    "pathReturnSlashErrorMessage": "Невъзможно е указването на път, използващ \"/\"",
+    "enterLowPriorityStateOnPause": "При пауза, използвай режим на нисък приоритет",
+    "shuffleAllTrackCount": "Разбъркайте всички песни",
+    "shuffleAllTrackCountSubtitle": "Брой песни за зареждане при използване на бутона за разбъркване на всички песни.",
+    "viewType": "Вид преглед",
+    "viewTypeSubtitle": "Управлява режим мрежа или списък за всички раздели в екрана за музика, с изключение на началния екран.",
+    "list": "Списък",
+    "grid": "Решетка",
+    "landscape": "Пейзажен",
+    "showTextOnGridView": "Показване на текст в решетъчен изглед",
+    "useCoverAsBackground": "Показване на замъглена обложка като фон на плейъра",
+    "theme": "Тема",
+    "system": "Система",
+    "light": "Светла",
+    "dark": "Тъмна",
+    "tabs": "Раздели",
+    "cancelSleepTimer": "Отмяна на таймера?",
+    "yesButtonLabel": "Да",
+    "noButtonLabel": "Не",
+    "minutes": "Минути",
+    "sleepTimerTooltip": "Таймер",
+    "addToPlaylistTooltip": "Добавяне към списъка за изпълнение",
+    "addToPlaylistTitle": "Добавяне към списъка за изпълнение",
+    "newPlaylist": "Нов списък за изпълнение",
+    "createButtonLabel": "Създаване",
+    "playlistCreated": "Списъкът за изпълнение е създаден.",
+    "noItem": "Липсващ файл",
+    "noAlbum": "Липсващ албум",
+    "unknownArtist": "Неизвестен изпълнител",
+    "queue": "Опашка",
+    "addToQueue": "Добавяне към опашката",
+    "goToAlbum": "Отидете в албума",
+    "startingInstantMix": "Стартиране на незабавен микс.",
+    "anErrorHasOccured": "Появи се грешка.",
+    "responseError": "{error} Код на грешката {statusCode}.",
+    "@responseError": {
+        "placeholders": {
+            "error": {
+                "type": "String",
+                "example": "Forbidden"
+            },
+            "statusCode": {
+                "type": "int",
+                "example": "403"
+            }
+        }
+    },
+    "removeFromMix": "Премахни от микса",
+    "addToMix": "Добави към микса",
+    "internalExternalIpExplanation": "В случай, че искате да имате достъп до вашия Jellyfin сървър дистанционно, трябва да използвате външния си IP адрес.\n\nВ случай, че сървърът ви работи на HTTP стандартен порт (80 или 443) или портът по подразбиране на Jellyfin (8096), не е нужно да посочвате такъв.\n\nАко URL адресът е правилен, под полето за въвеждане би трябвало да видите информация за вашия сървър.",
+    "@internalExternalIpExplanation": {
+        "description": "Extra info for which IP to use for remote access, and info on whether or not the user needs to specify a port."
+    },
+    "selectMusicLibraries": "Изберете музикални библиотеки",
+    "@selectMusicLibraries": {
+        "description": "App bar title for library select screen"
+    },
+    "startMixNoTracksArtist": "Натиснете и задръжте върху изпълнител, за да го добавите или премахнете, от разбъркано възпроизвеждане",
+    "@startMixNoTracksArtist": {
+        "description": "Snackbar message that shows when the user presses the instant mix button with no artists selected"
+    },
+    "startMixNoTracksAlbum": "Натиснете и задръжте върху албум, за да го добавите или премахнете от разбъркано възпроизвеждане",
+    "@startMixNoTracksAlbum": {
+        "description": "Snackbar message that shows when the user presses the instant mix button with no albums selected"
+    },
+    "productionYear": "Година на издаване",
+    "downloadCount": "{count,plural, =1{{count} изтегляне} other{{count} изтегляне}}",
+    "@downloadCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "errorScreenError": "Възникна грешка при получаване на списъка с грешки! Създайте \"issue\" в Github и изтрий данните на приложението",
+    "downloadsQueued": "Сваляне на файлове",
+    "addButtonLabel": "Добави",
+    "applicationLegalese": "Лиценз Mozilla Public License 2.0.\nПрограмният код е достъпен на: {sourceCodeLink}",
+    "trackCount": "{count,plural,=1{{count} Песен} other{{count} Песни}}",
+    "@trackCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "enterLowPriorityStateOnPauseSubtitle": "Известията да бъдат отхвърлени при пауза. Също така позволи на Android да прекрати услугата при пауза.",
+    "customLocationsBuggy": "Персонализираните местоположения са изключително нестабилни, поради проблеми с правата. Обмислям варианти са справяне с проблема, но за сега непрепоръчвам тяхното използване.",
+    "showTextOnGridViewSubtitle": "Дали да се показва или не текст (името на песента, изпълнителя и т.н.), в решетъчен режим.",
+    "useCoverAsBackgroundSubtitle": "Дали да се показва или не, замъглена обложка на албума като фон на плейъра.",
+    "instantMix": "Незабавен микс",
+    "responseError401": "{error} Код на грешката {statusCode}. Това вероятно означава, че сте използвали грешно потребителско име/парола, или вашият клиент вече не е удостоверен.",
+    "@responseError401": {
+        "placeholders": {
+            "error": {
+                "type": "String",
+                "example": "Unauthorized"
+            },
+            "statusCode": {
+                "type": "int",
+                "example": "401"
+            }
+        }
+    },
+    "additionalPeople": "",
+    "@additionalPeople": {
+        "description": "Label for the feature chips showing additional people in the credits of a track or album"
+    },
+    "nowPlayingBarTooltip": "",
+    "@nowPlayingBarTooltip": {
+        "description": "Tooltip for the now playing bar at the bottom of the screen"
+    },
+    "codec": "",
+    "@codec": {
+        "description": "Label for the feature chips showing the codec of a track"
+    },
+    "playbackMode": "",
+    "@playbackMode": {
+        "description": "Label for the feature chips showing the playback mode of a track. See [playbackModeLocal], [playbackModeDirectPlaying], and [playbackModeTranscoding]"
+    },
+    "bitDepth": "",
+    "@bitDepth": {
+        "description": "Label for the feature chips showing the bit depth of a track"
+    },
+    "bitRate": "",
+    "@bitRate": {
+        "description": "Label for the feature chips showing the bit rate of a track"
+    },
+    "sampleRate": "",
+    "@sampleRate": {
+        "description": "Label for the feature chips showing the sample rate of a track"
+    },
+    "size": "",
+    "@size": {
+        "description": "Label for the feature chips showing the size (original file size or transcoded size, if available) of a track"
+    },
+    "finampTagline": "Музикален плейър Jellyfin с отворен код",
+    "@finampTagline": {
+        "description": "Tagline / short description for the app"
+    },
+    "startupErrorTitle": "Нещо се обърка при стартиране на приложението!",
+    "@startupErrorTitle": {
+        "description": "The title for the error screen that shows when startup fails."
+    },
+    "startupErrorCallToAction": "Моля, създайте \"issue\" на \"github.com/jmshrv/finamp\" с прикачени лог файлове(използвайте бутонът отдолу) и скрийншот на тази страница, за да можем да поправим проблема възможно най-бързо.",
+    "@startupErrorCallToAction": {
+        "description": "The subtitle / call to action for what to do after encountering a startup error"
+    },
+    "startupErrorWorkaround": "Като заобиколно решение на грешката, можете да изчистите данните и да нулирате приложението. Имайте предвид, че в този случай всички ваши настройки и изтегляния ще бъдат изтрити.",
+    "@startupErrorWorkaround": {
+        "description": "The subtitle for how to manually recover from a startup error"
+    },
+    "about": "Относно Finamp",
+    "@about": {
+        "description": "Label for the about/info button on the settings screen"
+    },
+    "aboutContributionPrompt": "Създаден от готини хора в свободното им време.\nМожеш да бъдеш един от тях!",
+    "@aboutContributionPrompt": {
+        "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
+    },
+    "aboutContributionLink": "Допринесете за Finamp в GitHub:",
+    "@aboutContributionLink": {
+        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+    },
+    "aboutReleaseNotes": "Бележки към версията:",
+    "@aboutReleaseNotes": {
+        "description": "Link to the release notes, shown in the about screen."
+    },
+    "aboutTranslations": "Помогнете с преводът на Finamp :",
+    "@aboutTranslations": {
+        "description": "Link to the translation project, shown in the about screen."
+    },
+    "aboutThanks": "Благодаря, че използвате Finamp!",
+    "@aboutThanks": {
+        "description": "Thank you message shown in the about screen."
+    },
+    "loginFlowSlogan": "Вашата музика, по начинат по който я искате.",
+    "@loginFlowSlogan": {
+        "description": "Slogan shown on the login screen."
+    },
+    "loginFlowGetStarted": "Започнете!",
+    "@loginFlowGetStarted": {
+        "description": "Button label for the login/splash screen."
+    },
+    "viewLogs": "Преглед на логовете",
+    "@viewLogs": {
+        "description": "Label for button shown during the login process that allows the user to view the app logs"
+    },
+    "changeLanguage": "Смяна на езика",
+    "@changeLanguage": {
+        "description": "Label for button shown during the login process that allows the user to change the app language"
+    },
+    "loginFlowServerSelectionHeading": "Свързване с Jellyfin",
+    "@loginFlowServerSelectionHeading": {
+        "description": "Heading for the server selection step during the login flow."
+    },
+    "back": "Назад",
+    "@back": {
+        "description": "Label for the back button."
+    },
+    "serverUrlHint": "напр. demo.jellyfin.org/stable",
+    "@serverUrlHint": {
+        "description": "Hint text for the server URL input field. Should be the address to an actual, public Jellyfin server."
+    },
+    "serverUrlInfoButtonTooltip": "Помощ за URL на сървъра",
+    "@serverUrlInfoButtonTooltip": {
+        "description": "Tooltip for the button that shows the extra info dialog for which IP to use for remote access, and info on whether or not the user needs to specify a port."
+    },
+    "connectingToServer": "Свързване със сървъра…",
+    "@connectingToServer": {
+        "description": "Text shown while the connection to the specified server is attempted"
+    },
+    "loginFlowLocalNetworkServers": "Сървъри в локалната ви мрежа:",
+    "@loginFlowLocalNetworkServers": {
+        "description": "Heading for the list of servers on the local network, shown during the login flow. Should ideally have a colon at the end."
+    },
+    "loginFlowLocalNetworkServersScanningForServers": "Търсене на сървъри…",
+    "@loginFlowLocalNetworkServersScanningForServers": {
+        "description": "Text shown while servers are being discovered via UDP broadcasts"
+    },
+    "loginFlowAccountSelectionHeading": "Изберете вашият акаунт",
+    "@loginFlowAccountSelectionHeading": {
+        "description": "Heading for the account selection step during the login flow."
+    },
+    "backToServerSelection": "Назад към избор на сървър",
+    "@backToServerSelection": {
+        "description": "Label for the button that takes the user back to the server selection step during the login flow."
+    },
+    "loginFlowNamelessUser": "Потребител без име",
+    "@loginFlowNamelessUser": {
+        "description": "Name for a user that doesn't have a name set on the server."
+    },
+    "loginFlowCustomUser": "Персонализиран потребител",
+    "@loginFlowCustomUser": {
+        "description": "Label for a button that allows the user to enter a custom username/password, for example if their user account is hidden."
+    },
+    "loginFlowAuthenticationHeading": "Влезте във вашия акаунт",
+    "@loginFlowAuthenticationHeading": {
+        "description": "Heading for the authentication step during the login flow."
+    },
+    "backToAccountSelection": "Назад към Избор на Акаунт",
+    "@backToAccountSelection": {
+        "description": "Label for the button that takes the user back to the account selection step during the login flow."
+    },
+    "loginFlowQuickConnectPrompt": "Използване на код за бързо свързване",
+    "@loginFlowQuickConnectPrompt": {
+        "description": "Text shown above the quick connect code. The full message will be 'Use Quick Connect code {code}'. The code will be a 6-digit number. Ideally, 'Quick Connect' should be capitalized and translated exactly as it is in the Jellyfin web UI."
+    },
+    "loginFlowQuickConnectInstructions": "Отворете апликацията или уебсайтът на Jellyfin, цъкнете на иконката ви и изберете Бързо свързване.",
+    "@loginFlowQuickConnectInstructions": {
+        "description": "Instructions for how and where to enter the Quick Connect code. Ideally, 'Quick Connect' should be capitalized and translated exactly as it is in the Jellyfin web UI."
+    },
+    "loginFlowQuickConnectDisabled": "Бързо свързване е изключено на този сървър.",
+    "@loginFlowQuickConnectDisabled": {
+        "description": "Warning that is shown during authentication if Quick Connect is disabled on the server."
+    },
+    "orDivider": "или",
+    "@orDivider": {
+        "description": "Text that separates two different ways to log in. For example, after selecting a server during the login flow, the other can either use Quick Connect, *or* select an account from a list. The text is stylized by wrapping it in dashes: '- or -'."
+    },
+    "loginFlowSelectAUser": "Изберете потребител",
+    "@loginFlowSelectAUser": {
+        "description": "Heading for the list of users that the user can select from during the login flow."
+    },
+    "usernameHint": "Въведете вашето потребителско име",
+    "@usernameHint": {
+        "description": "Hint text for the username input field."
+    },
+    "usernameValidationMissingUsername": "Моля въведете потребителско име",
+    "@usernameValidationMissingUsername": {
+        "description": "Error message that shows when the user submits a login without a username"
+    },
+    "passwordHint": "Въведете паролата си",
+    "@passwordHint": {
+        "description": "Hint text for the password input field."
+    },
+    "login": "Вход",
+    "@login": {
+        "description": "Label for the login button."
+    },
+    "verboseLogging": "Подробно логиране",
+    "@verboseLogging": {
+        "description": "Title for the toggle that enables detailed logging on the logs screen"
+    },
+    "verboseLoggingSubtitle": "Поддържайте подробни логове за доклади за грешки. Изключете тази опция за по-добра производителност при възпроизвеждане.",
+    "@verboseLoggingSubtitle": {
+        "description": "Subtitle explaining the verbose logging toggle"
+    },
+    "allLibraries": "Всички библиотеки",
+    "@allLibraries": {
+        "description": "All Libraries"
+    },
+    "activeLibraries": "Активни библиотеки",
+    "@activeLibraries": {
+        "description": "Active Libraries"
+    },
+    "appearsOnAlbums": "Участва в",
+    "noGenres": "Без Жанр",
+    "@noGenres": {
+        "description": "Gets shown when there are no genres available for an album or artist"
+    },
+    "startMixNoTracksGenre": "Натиснете и задръжте върху жанр, за да го добавите или премахнете от разбъркано възпроизвеждане",
+    "@startMixNoTracksGenre": {
+        "description": "Snackbar message that shows when the user presses the instant mix button with no genres selected"
+    },
+    "favorite": "Любим",
+    "favorites": "Любими",
+    "shuffleSome": "Случайното възпроизвеждане на част",
+    "title": "Заглавие",
+    "albumArtists": "Изпълнители на албума",
+    "performingArtists": "Изпълняващи артисти",
+    "performingArtist": "Изпълняващ артист",
+    "duration": "Времетраене",
+    "defaultOrder": "Ред по подразбиране",
+    "@defaultOrder": {
+        "description": "Default sorting order for playlists (server order)"
+    },
+    "inAlbumOrPlaylist": "Подредба по албум/плейлист",
+    "@inAlbumOrPlaylist": {
+        "description": "Sorting order for tracks in an album or playlist (by disc, then index, then name"
+    },
+    "adaptive": "Адаптивен",
+    "formattedRelativeTime": "{type, select, just_now{току-що} minutes{преди {value} мин.} hours{преди {value} ч.} yesterday{вчера} days{{value, plural,=1{преди 1 ден} other{преди {value} дни}}} other{value}}",
+    "@formattedRelativeTime": {
+        "description": "Returns a relative time string based on how long ago something happened. Used for various DateTime values such as Date Last Played and Date Added.",
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "description": "The category of time passed: one of 'just_now', 'minutes', 'hours', 'yesterday', or 'days'."
+            },
+            "value": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "activeDownloads": "Активни Сваляния",
+    "activeDownloadsTitle": "Активни Сваляния",
+    "noActiveDownloads": "Няма активни сваляния.",
+    "specialDownloads": "Специални сваляния",
+    "@specialDownloads": {
+        "description": "Title for the special downloads section on the downloads screen."
+    },
+    "libraryDownloads": "Сваляния от библиотеката",
+    "@libraryDownloads": {
+        "description": "Title for the library downloads section on the downloads screen."
+    },
+    "noItemsDownloaded": "Няма свалени елементи.",
+    "@noItemsDownloaded": {
+        "description": "Shown on the downloads screen for sections without any downloaded items."
+    },
+    "discUnknown": "Неизвестен диск",
+    "@discUnknown": {
+        "description": "Shown when the disc number is unknown or not set for a group of tracks on the album screen"
+    }
+}
