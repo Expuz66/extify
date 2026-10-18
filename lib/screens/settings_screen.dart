@@ -6,12 +6,12 @@ import 'package:finamp/menus/quick_connect_authorization_menu.dart';
 import 'package:finamp/menus/server_sharing_menu.dart';
 import 'package:finamp/screens/accessibility_settings_screen.dart';
 import 'package:finamp/screens/audio_service_settings_screen.dart';
+import 'package:finamp/screens/check_for_updates_screen.dart';
 import 'package:finamp/screens/downloads_settings_screen.dart';
 import 'package:finamp/screens/home_screen_settings_screen.dart';
 import 'package:finamp/screens/interaction_settings_screen.dart';
 import 'package:finamp/screens/language_selection_screen.dart';
 import 'package:finamp/screens/layout_settings_screen.dart';
-import 'package:finamp/screens/network_settings_screen.dart';
 import 'package:finamp/screens/playback_reporting_settings_screen.dart';
 import 'package:finamp/screens/quick_settings_screen.dart';
 import 'package:finamp/screens/transcoding_settings_screen.dart';
@@ -19,6 +19,7 @@ import 'package:finamp/screens/view_selector.dart';
 import 'package:finamp/screens/volume_normalization_settings_screen.dart';
 import 'package:finamp/services/client_certificate_installer.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
+import 'package:finamp/services/update_installer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
@@ -72,11 +73,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             leading: const Icon(Icons.download),
             title: Text(AppLocalizations.of(context)!.downloadSettings),
             onTap: () => Navigator.of(context).pushNamed(DownloadsSettingsScreen.routeName),
-          ),
-          ListTile(
-            leading: const Icon(Icons.wifi),
-            title: Text(AppLocalizations.of(context)!.networkSettingsTitle),
-            onTap: () => Navigator.of(context).pushNamed(NetworkSettingsScreen.routeName),
           ),
           ListTile(
             leading: const Icon(Icons.music_note),
@@ -148,6 +144,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             enabled: ClientCertificateInstaller.isSupported,
             onTap: () => showClientCertificateMenu(context: context),
+          ),
+          ListTile(
+            leading: const Icon(TablerIcons.refresh),
+            title: Text(AppLocalizations.of(context)!.checkForUpdates),
+            subtitle: UpdateInstaller.isSupported ? null : Text(AppLocalizations.of(context)!.updateNotSupported),
+            enabled: UpdateInstaller.isSupported,
+            onTap: () => Navigator.of(context).pushNamed(CheckForUpdatesScreen.routeName),
           ),
           ListTile(
             leading: const Icon(Icons.description_outlined),

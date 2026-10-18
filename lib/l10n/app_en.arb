@@ -3831,5 +3831,135 @@
     "quickSettingsLayoutLink": "All layout & theme settings",
     "quickSettingsAllSettingsLink": "All Settings",
     "quickSettingsNetworkLink": "Configure the local address for your server",
-  "loginFlowLocalNetworkServersNoResults": "No servers detected yet - you may need to manually enter the server address."
+  "loginFlowLocalNetworkServersNoResults": "No servers detected yet - you may need to manually enter the server address.",
+  "checkForUpdates": "Check for updates",
+  "@checkForUpdates": {
+    "description": "Settings entry that opens the in-app update screen"
+  },
+  "updateCheckingForUpdates": "Checking for updates…",
+  "@updateCheckingForUpdates": {
+    "description": "Shown while the app is asking GitHub for the latest release"
+  },
+  "updateUpToDate": "Extify is up to date.",
+  "@updateUpToDate": {
+    "description": "Shown when the installed version is the newest published release"
+  },
+  "updateAvailableMessage": "Version {version} is available.",
+  "@updateAvailableMessage": {
+    "description": "Shown when a newer release exists",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateInstalledVersion": "Installed version: {version}",
+  "@updateInstalledVersion": {
+    "description": "Label showing the currently installed version",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateLatestVersion": "Latest version: {version}",
+  "@updateLatestVersion": {
+    "description": "Label showing the newest published version",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateReleaseNotes": "Release notes",
+  "@updateReleaseNotes": {
+    "description": "Heading above the release notes body text"
+  },
+  "updateDownloadButton": "Download update",
+  "@updateDownloadButton": {
+    "description": "Button that starts downloading the release APK"
+  },
+  "updateInstallButton": "Install update",
+  "@updateInstallButton": {
+    "description": "Button that opens the Android package installer"
+  },
+  "updateDownloadingProgress": "Downloading update… {percent}%",
+  "@updateDownloadingProgress": {
+    "description": "Download progress label",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "updateVerifyingDownload": "Verifying the downloaded file…",
+  "@updateVerifyingDownload": {
+    "description": "Shown while the downloaded APK is being checked"
+  },
+  "updateReadyToInstall": "Download complete. Tap \"Install update\" to continue.",
+  "@updateReadyToInstall": {
+    "description": "Shown after the download passed verification"
+  },
+  "updateCheckAgainButton": "Check again",
+  "@updateCheckAgainButton": {
+    "description": "Button that repeats the update check"
+  },
+  "updateCancelButton": "Cancel download",
+  "@updateCancelButton": {
+    "description": "Button that stops an in-progress update download"
+  },
+  "updateErrorNetwork": "Could not reach GitHub. Check your internet connection and try again.",
+  "@updateErrorNetwork": {
+    "description": "Update error shown when GitHub is unreachable"
+  },
+  "updateErrorRateLimit": "GitHub's rate limit was reached. Please try again later.",
+  "@updateErrorRateLimit": {
+    "description": "Update error shown when the GitHub API rate limit is hit"
+  },
+  "updateErrorNoReleases": "This repository has no published stable releases yet.",
+  "@updateErrorNoReleases": {
+    "description": "Update error shown when the repository has no stable release"
+  },
+  "updateErrorNoCompatibleApk": "The latest release does not contain an APK for this device.",
+  "@updateErrorNoCompatibleApk": {
+    "description": "Update error shown when no APK asset matches the device"
+  },
+  "updateErrorChecksumMismatch": "The downloaded file did not match the published checksum, so it was deleted.",
+  "@updateErrorChecksumMismatch": {
+    "description": "Update error shown when the SHA-256 checksum verification fails"
+  },
+  "updateErrorPackageMismatch": "The downloaded file is not an Extify update for this device.",
+  "@updateErrorPackageMismatch": {
+    "description": "Update error shown when the APK application ID does not match"
+  },
+  "updateErrorSignatureMismatch": "The update is signed with a different key than the installed app, so Android will not accept it.",
+  "@updateErrorSignatureMismatch": {
+    "description": "Update error shown when the APK signing certificate does not match"
+  },
+  "updateErrorGeneric": "Update failed: {error}",
+  "@updateErrorGeneric": {
+    "description": "Fallback update error message",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "updateUnknownSourcesNotice": "Android needs your permission to install apps from Extify. You will be asked to allow it before the installer opens.",
+  "@updateUnknownSourcesNotice": {
+    "description": "Explains the unknown-apps install permission required on Android"
+  },
+  "updateNotSupported": "In-app updates are only available on Android.",
+  "@updateNotSupported": {
+    "description": "Shown on platforms that cannot install Android packages"
+  },
+  "updateStartupSnackbar": "Extify {version} is available.",
+  "@updateStartupSnackbar": {
+    "description": "Non-blocking notice shown at startup when an update exists",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  }
 }

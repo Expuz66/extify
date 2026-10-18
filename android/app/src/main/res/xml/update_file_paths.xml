@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Paths served by the update FileProvider (authority ${applicationId}.update_installer).
+     Only the app-private "updates" folder is shared, and only so Android's
+     package installer can read a downloaded APK. -->
+<paths>
+    <files-path name="extify_updates" path="updates/" />
+    <cache-path name="extify_updates_cache" path="updates/" />
+</paths>

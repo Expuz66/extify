@@ -109,7 +109,9 @@ class DefaultSettings {
   // FinampSettings's constructor and Hive's defaultValue.
   static const isOffline = false;
   static const themeMode = ThemeMode.system;
-  static const amoledTheme = false;
+  // Extify default: new installs start with the pure black AMOLED dark scheme.
+  // Existing users keep whatever is already saved in their settings box.
+  static const amoledTheme = true;
   static const Locale? locale = null;
   static const Color? accentColor = null;
   static const shouldTranscode = false;
@@ -159,15 +161,20 @@ class DefaultSettings {
     ContentType.tracks,
     ContentType.genres,
   ];
+  // Extify default: only Home, Albums, Playlists and Tracks are visible.
+  // tabOrder already lists them in that order, so the remaining tab types are
+  // hidden here rather than by reordering the list.
   static const showTabs = {
     ContentType.home: true,
     ContentType.albums: true,
-    ContentType.genericArtists: true,
+    // Hidden by default
+    ContentType.genericArtists: false,
     ContentType.albumArtists: false,
     ContentType.performingArtists: false,
     ContentType.playlists: true,
     ContentType.tracks: true,
-    ContentType.genres: true,
+    // Hidden by default
+    ContentType.genres: false,
   };
   static const itemSwipeActionLeftToRight = ItemSwipeActions.nothing;
   static const itemSwipeActionRightToLeft = ItemSwipeActions.addToNextUp;
@@ -275,7 +282,9 @@ class DefaultSettings {
   static const lastUsedPlaybackActionRowPage = PlaybackActionRowPage.newQueue;
   static const lastUsedPlaybackActionRowPageForQueueMenu = PlaybackActionRowPage.moveWithinQueue;
   static const useSystemAccentColor = false;
-  static const useMonochromeIcon = false;
+  // Extify default: new installs start with the monochrome in-app logo (this
+  // never affects the launcher icon).
+  static const useMonochromeIcon = true;
   static const radioMode = RadioMode.similar;
   static const radioEnabled = false;
   static const duckOnAudioInterruption = true;
@@ -299,14 +308,11 @@ class DefaultSettings {
       QuickActionConfig(action: FinampQuickActions.playPreviousQueue),
       QuickActionConfig(action: FinampQuickActions.surpriseMe),
     ],
+    // Extify default home sections, in display order.
     sections: [
       HomeScreenSectionConfiguration.fromPreset(HomeScreenSectionPresetType.recentlyAddedAlbums),
       HomeScreenSectionConfiguration.fromPreset(HomeScreenSectionPresetType.favoriteTracks),
-      HomeScreenSectionConfiguration.fromPreset(HomeScreenSectionPresetType.favoriteAlbums),
-      HomeScreenSectionConfiguration.fromPreset(HomeScreenSectionPresetType.randomAlbumArtists),
       HomeScreenSectionConfiguration.fromPreset(HomeScreenSectionPresetType.recentlyAddedPlaylists),
-      HomeScreenSectionConfiguration.fromPreset(HomeScreenSectionPresetType.forgottenFavoriteTracks),
-      HomeScreenSectionConfiguration.fromPreset(HomeScreenSectionPresetType.recentQueues),
     ],
   );
   static const gridImageSizeMobile = 130;

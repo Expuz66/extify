@@ -3753,5 +3753,135 @@
     "clientCertificatesUnsupported": "Sertifikat client tidak didukung dalam platform ini",
     "@clientCertificatesUnsupported": {
         "description": "Message shown when client certificates are not supported on the user's current platform."
+    },
+    "checkForUpdates": "Periksa pembaruan",
+    "@checkForUpdates": {
+        "description": "Settings entry that opens the in-app update screen"
+    },
+    "updateCheckingForUpdates": "Memeriksa pembaruan…",
+    "@updateCheckingForUpdates": {
+        "description": "Shown while the app is asking GitHub for the latest release"
+    },
+    "updateUpToDate": "Extify sudah versi terbaru.",
+    "@updateUpToDate": {
+        "description": "Shown when the installed version is the newest published release"
+    },
+    "updateAvailableMessage": "Versi {version} sudah tersedia.",
+    "@updateAvailableMessage": {
+        "description": "Shown when a newer release exists",
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "updateInstalledVersion": "Versi terpasang: {version}",
+    "@updateInstalledVersion": {
+        "description": "Label showing the currently installed version",
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "updateLatestVersion": "Versi terbaru: {version}",
+    "@updateLatestVersion": {
+        "description": "Label showing the newest published version",
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "updateReleaseNotes": "Catatan rilis",
+    "@updateReleaseNotes": {
+        "description": "Heading above the release notes body text"
+    },
+    "updateDownloadButton": "Unduh pembaruan",
+    "@updateDownloadButton": {
+        "description": "Button that starts downloading the release APK"
+    },
+    "updateInstallButton": "Pasang pembaruan",
+    "@updateInstallButton": {
+        "description": "Button that opens the Android package installer"
+    },
+    "updateDownloadingProgress": "Mengunduh pembaruan… {percent}%",
+    "@updateDownloadingProgress": {
+        "description": "Download progress label",
+        "placeholders": {
+            "percent": {
+                "type": "int"
+            }
+        }
+    },
+    "updateVerifyingDownload": "Memverifikasi berkas yang diunduh…",
+    "@updateVerifyingDownload": {
+        "description": "Shown while the downloaded APK is being checked"
+    },
+    "updateReadyToInstall": "Unduhan selesai. Ketuk \"Pasang pembaruan\" untuk melanjutkan.",
+    "@updateReadyToInstall": {
+        "description": "Shown after the download passed verification"
+    },
+    "updateCheckAgainButton": "Periksa lagi",
+    "@updateCheckAgainButton": {
+        "description": "Button that repeats the update check"
+    },
+    "updateCancelButton": "Batalkan unduhan",
+    "@updateCancelButton": {
+        "description": "Button that stops an in-progress update download"
+    },
+    "updateErrorNetwork": "Tidak dapat menghubungi GitHub. Periksa koneksi internet Anda dan coba lagi.",
+    "@updateErrorNetwork": {
+        "description": "Update error shown when GitHub is unreachable"
+    },
+    "updateErrorRateLimit": "Batas akses GitHub tercapai. Silakan coba lagi nanti.",
+    "@updateErrorRateLimit": {
+        "description": "Update error shown when the GitHub API rate limit is hit"
+    },
+    "updateErrorNoReleases": "Repositori ini belum memiliki rilis stabil yang dipublikasikan.",
+    "@updateErrorNoReleases": {
+        "description": "Update error shown when the repository has no stable release"
+    },
+    "updateErrorNoCompatibleApk": "Rilis terbaru tidak menyediakan APK untuk perangkat ini.",
+    "@updateErrorNoCompatibleApk": {
+        "description": "Update error shown when no APK asset matches the device"
+    },
+    "updateErrorChecksumMismatch": "Berkas yang diunduh tidak cocok dengan checksum yang dipublikasikan, sehingga telah dihapus.",
+    "@updateErrorChecksumMismatch": {
+        "description": "Update error shown when the SHA-256 checksum verification fails"
+    },
+    "updateErrorPackageMismatch": "Berkas yang diunduh bukan pembaruan Extify untuk perangkat ini.",
+    "@updateErrorPackageMismatch": {
+        "description": "Update error shown when the APK application ID does not match"
+    },
+    "updateErrorSignatureMismatch": "Pembaruan ditandatangani dengan kunci yang berbeda dari aplikasi terpasang, sehingga Android tidak akan menerimanya.",
+    "@updateErrorSignatureMismatch": {
+        "description": "Update error shown when the APK signing certificate does not match"
+    },
+    "updateErrorGeneric": "Pembaruan gagal: {error}",
+    "@updateErrorGeneric": {
+        "description": "Fallback update error message",
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "updateUnknownSourcesNotice": "Android memerlukan izin Anda untuk memasang aplikasi dari Extify. Anda akan diminta mengizinkannya sebelum pemasang terbuka.",
+    "@updateUnknownSourcesNotice": {
+        "description": "Explains the unknown-apps install permission required on Android"
+    },
+    "updateNotSupported": "Pembaruan dalam aplikasi hanya tersedia di Android.",
+    "@updateNotSupported": {
+        "description": "Shown on platforms that cannot install Android packages"
+    },
+    "updateStartupSnackbar": "Extify {version} sudah tersedia.",
+    "@updateStartupSnackbar": {
+        "description": "Non-blocking notice shown at startup when an update exists",
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
     }
 }

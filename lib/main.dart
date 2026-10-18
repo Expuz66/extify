@@ -19,6 +19,7 @@ import 'package:finamp/screens/accessibility_settings_screen.dart';
 import 'package:finamp/screens/advanced_login_options_screen.dart';
 import 'package:finamp/screens/album_settings_screen.dart';
 import 'package:finamp/screens/artist_settings_screen.dart';
+import 'package:finamp/screens/check_for_updates_screen.dart';
 import 'package:finamp/screens/content_view_type_settings_screen.dart';
 import 'package:finamp/screens/downloads_settings_screen.dart';
 import 'package:finamp/screens/genre_settings_screen.dart';
@@ -1012,6 +1013,7 @@ class FinampApp extends ConsumerWidget {
         PlaylistEditScreen.routeName: (context) =>
             PlaylistEditScreen(playlist: ModalRoute.settingsOf(context)!.arguments as BaseItemDto),
         QuickSettingsScreen.routeName: (context) => const QuickSettingsScreen(),
+        CheckForUpdatesScreen.routeName: (context) => const CheckForUpdatesScreen(),
         //ShowAllScreen.routeName: (context) => const ShowAllScreen(),
       },
       initialRoute: SplashScreen.routeName,

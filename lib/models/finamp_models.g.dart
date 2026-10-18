@@ -416,7 +416,7 @@ class FinampSettingsAdapter extends TypeAdapter<FinampSettings> {
         themeMode: fields[133] == null
             ? ThemeMode.system
             : fields[133] as ThemeMode,
-        amoledTheme: fields[148] == null ? false : fields[148] as bool,
+        amoledTheme: fields[148] == null ? true : fields[148] as bool,
         locale: fields[134] == null
             ? DefaultSettings.locale
             : fields[134] as Locale?,
@@ -427,7 +427,7 @@ class FinampSettingsAdapter extends TypeAdapter<FinampSettings> {
             ? DefaultSettings.accentColor
             : fields[136] as Color?,
         useSystemAccentColor: fields[137] == null ? false : fields[137] as bool,
-        useMonochromeIcon: fields[138] == null ? false : fields[138] as bool,
+        useMonochromeIcon: fields[138] == null ? true : fields[138] as bool,
         duckOnAudioInterruption: fields[142] == null
             ? true
             : fields[142] as bool,

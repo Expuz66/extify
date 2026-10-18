@@ -3,6 +3,8 @@ package com.unicornsonlsd.finamp
 import android.app.UiModeManager
 import android.content.Intent
 import android.content.Intent.CATEGORY_APP_MUSIC
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore.INTENT_ACTION_MUSIC_PLAYER
@@ -11,6 +13,7 @@ import android.system.ErrnoException
 import android.system.Os
 import android.util.Log
 import androidx.annotation.WorkerThread
+import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import androidx.mediarouter.app.SystemOutputSwitcherDialogController
@@ -24,6 +27,7 @@ import kotlinx.coroutines.withContext
 import java.io.ByteArrayInputStream
 import java.io.File
 import java.security.KeyStore
+import java.security.MessageDigest
 import javax.net.ssl.HttpsURLConnection
 import javax.net.ssl.KeyManagerFactory
 import javax.net.ssl.SSLContext
@@ -42,6 +46,11 @@ class MainActivity : AudioServiceActivity() {
 
         private const val SET_NATIVE_THEME_CHANNEL = "com.unicornsonlsd.finamp/set_native_theme"
         private const val SET_NATIVE_THEME_CHANNEL_LOG_TAG = "setNativeThemeChannel"
+
+        private const val UPDATE_INSTALLER_CHANNEL = "com.unicornsonlsd.finamp/update_installer"
+        private const val UPDATE_INSTALLER_CHANNEL_LOG_TAG = "UpdateInstallerChannel"
+
+        private const val UPDATE_DIRECTORY_NAME = "updates"
     }
 
     private lateinit var mediaRouter: MediaRouter
@@ -253,6 +262,68 @@ class MainActivity : AudioServiceActivity() {
                 }
             }
         }
+        MethodChannel(
+            flutterEngine.dartExecutor.binaryMessenger,
+            UPDATE_INSTALLER_CHANNEL,
+        ).setMethodCallHandler { call, result ->
+            when (call.method) {
+                "getSupportedAbis" -> {
+                    result.success(Build.SUPPORTED_ABIS.toList())
+                }
+                "getUpdateDir" -> {
+                    try {
+                        result.success(updateDirectory().absolutePath)
+                    } catch (e: Exception) {
+                        Log.e(UPDATE_INSTALLER_CHANNEL_LOG_TAG, "Could not prepare the update directory", e)
+                        result.error("UPDATE_DIR_ERROR", e.message, null)
+                    }
+                }
+                "getInstalledAppInfo" -> {
+                    try {
+                        result.success(installedAppInfo())
+                    } catch (e: Exception) {
+                        Log.e(UPDATE_INSTALLER_CHANNEL_LOG_TAG, "Could not read the installed app info", e)
+                        result.error("INSTALLED_APP_ERROR", e.message, null)
+                    }
+                }
+                "inspectApk" -> {
+                    val path = call.argument<String>("path")
+                    if (path == null) {
+                        result.error("INVALID_ARGS", "path is required", null)
+                        return@setMethodCallHandler
+                    }
+                    // Hashing a ~50 MB APK must stay off the UI thread.
+                    lifecycleScope.launch {
+                        withContext(Dispatchers.IO) {
+                            try {
+                                result.success(inspectApk(File(path)))
+                            } catch (e: Exception) {
+                                Log.e(UPDATE_INSTALLER_CHANNEL_LOG_TAG, "Could not inspect the downloaded APK", e)
+                                result.error("APK_INSPECTION_ERROR", e.message, null)
+                            }
+                        }
+                    }
+                }
+                "installApk" -> {
+                    val path = call.argument<String>("path")
+                    if (path == null) {
+                        result.error("INVALID_ARGS", "path is required", null)
+                        return@setMethodCallHandler
+                    }
+                    try {
+                        installApk(File(path))
+                        result.success(null)
+                    } catch (e: Exception) {
+                        Log.e(UPDATE_INSTALLER_CHANNEL_LOG_TAG, "Could not open the package installer", e)
+                        result.error("APK_INSTALL_ERROR", e.message, null)
+                    }
+                }
+                else -> {
+                    Log.e(UPDATE_INSTALLER_CHANNEL_LOG_TAG, "Method not found: '${call.method}'")
+                    result.notImplemented()
+                }
+            }
+        }
     }
 
     private fun installClientCertificate(bytes: ByteArray, password: String) {
@@ -326,5 +397,116 @@ class MainActivity : AudioServiceActivity() {
 
     private fun showOutputSwitcherDialog() {
         SystemOutputSwitcherDialogController.showDialog(this)
+    }
+
+    /** App-private folder the FileProvider exposes to the package installer. */
+    private fun updateDirectory(): File {
+        val directory = File(filesDir, UPDATE_DIRECTORY_NAME)
+        if (!directory.exists()) {
+            directory.mkdirs()
+        }
+        return directory
+    }
+
+    private fun installedAppInfo(): Map<String, Any?> {
+        val info = packageManager.getPackageInfo(packageName, signingFlags())
+        return mapOf(
+            "packageName" to packageName,
+            "versionName" to (info.versionName ?: ""),
+            "versionCode" to versionCodeOf(info),
+            "signingSha256" to signingDigests(info).firstOrNull().orEmpty(),
+            "signingSha256All" to signingDigests(info),
+        )
+    }
+
+    /** Reads package identity, signature and checksum straight from the APK. */
+    @WorkerThread
+    private fun inspectApk(file: File): Map<String, Any?> {
+        if (!file.isFile) {
+            throw IllegalArgumentException("The downloaded file does not exist.")
+        }
+        val info = packageManager.getPackageArchiveInfo(file.absolutePath, signingFlags())
+            ?: throw IllegalArgumentException("Android could not read the downloaded file as an APK.")
+        return mapOf(
+            "packageName" to (info.packageName ?: ""),
+            "versionName" to (info.versionName ?: ""),
+            "versionCode" to versionCodeOf(info),
+            "signingSha256" to signingDigests(info).firstOrNull().orEmpty(),
+            "signingSha256All" to signingDigests(info),
+            "fileSha256" to sha256HexOfFile(file),
+            "bytes" to file.length(),
+        )
+    }
+
+    /**
+     * Hands [file] to Android's package installer.
+     *
+     * This only *opens* the installer: the system shows the update prompt and
+     * the user confirms. The app never installs anything on its own.
+     */
+    private fun installApk(file: File) {
+        if (!file.isFile) {
+            throw IllegalArgumentException("The downloaded update no longer exists.")
+        }
+        val uri = FileProvider.getUriForFile(this, "$packageName.update_installer", file)
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, "application/vnd.android.package-archive")
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        startActivity(intent)
+        Log.i(UPDATE_INSTALLER_CHANNEL_LOG_TAG, "Opened the package installer for ${file.name}")
+    }
+
+    private fun signingFlags(): Int =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            PackageManager.GET_SIGNING_CERTIFICATES
+        } else {
+            @Suppress("DEPRECATION")
+            PackageManager.GET_SIGNATURES
+        }
+
+    private fun versionCodeOf(info: PackageInfo): Long =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            info.longVersionCode
+        } else {
+            @Suppress("DEPRECATION")
+            info.versionCode.toLong()
+        }
+
+    /**
+     * Every signing certificate digest Android knows about for this package, so
+     * a key rotation history still matches.
+     */
+    private fun signingDigests(info: PackageInfo): List<String> {
+        val digests = LinkedHashSet<String>()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val signingInfo = info.signingInfo
+            if (signingInfo != null) {
+                signingInfo.apkContentsSigners?.forEach { digests.add(sha256Hex(it.toByteArray())) }
+                signingInfo.signingCertificateHistory?.forEach { digests.add(sha256Hex(it.toByteArray())) }
+            }
+        } else {
+            @Suppress("DEPRECATION")
+            info.signatures?.forEach { digests.add(sha256Hex(it.toByteArray())) }
+        }
+        return digests.toList()
+    }
+
+    private fun sha256Hex(bytes: ByteArray): String =
+        MessageDigest.getInstance("SHA-256").digest(bytes).joinToString("") { "%02x".format(it) }
+
+    @WorkerThread
+    private fun sha256HexOfFile(file: File): String {
+        val digest = MessageDigest.getInstance("SHA-256")
+        file.inputStream().use { stream ->
+            val buffer = ByteArray(1 shl 16)
+            while (true) {
+                val read = stream.read(buffer)
+                if (read <= 0) break
+                digest.update(buffer, 0, read)
+            }
+        }
+        return digest.digest().joinToString("") { "%02x".format(it) }
     }
 }

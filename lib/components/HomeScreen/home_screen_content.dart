@@ -1,7 +1,8 @@
+import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:balanced_text/balanced_text.dart';
 import 'package:finamp/components/AlbumScreen/download_button.dart';
 import 'package:finamp/components/Buttons/cta_small.dart';
 import 'package:finamp/components/HomeScreen/home_screen_quick_action_button.dart';
@@ -10,17 +11,20 @@ import 'package:finamp/components/MusicScreen/item_card.dart';
 import 'package:finamp/components/MusicScreen/item_wrapper.dart';
 import 'package:finamp/components/MusicScreen/music_screen_tab_view.dart';
 import 'package:finamp/components/finamp_section_header.dart';
+import 'package:finamp/components/global_snackbar.dart';
 import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/menus/components/icon_button_with_semantics.dart';
 import 'package:finamp/menus/home_section_menu.dart';
 import 'package:finamp/models/finamp_models.dart';
 import 'package:finamp/models/music_models.dart';
-import 'package:finamp/screens/home_screen_settings_screen.dart';
+import 'package:finamp/screens/check_for_updates_screen.dart';
 import 'package:finamp/screens/music_screen.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
 import 'package:finamp/services/music_screen_provider.dart';
 import 'package:finamp/services/queue_service.dart';
 import 'package:finamp/services/quick_actions_service.dart';
+import 'package:finamp/services/update_installer.dart';
+import 'package:finamp/services/update_service.dart';
 import 'package:finamp/utils/platform_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,6 +32,8 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:logging/logging.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../extensions/localizations.dart';
 import '../../services/finamp_user_helper.dart';
@@ -49,6 +55,61 @@ class _HomeScreenContentState extends ConsumerState<HomeScreenContent>
   // tabs on the music screen should be kept alive
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void initState() {
+    super.initState();
+    unawaited(_maybeCheckForUpdatesOnStartup());
+  }
+
+  /// Best-effort update check that must never interfere with startup.
+  ///
+  /// It runs at most once per [UpdateService.startupCheckCooldown], records the
+  /// attempt before contacting GitHub, stays silent unless a newer stable
+  /// release exists, and reports nothing at all when anything goes wrong. The
+  /// manual entry point lives in Settings.
+  Future<void> _maybeCheckForUpdatesOnStartup() async {
+    if (!UpdateInstaller.isSupported) return;
+
+    try {
+      final supportDirectory = await getApplicationSupportDirectory();
+      final marker = File('${supportDirectory.path}${Platform.pathSeparator}update_check.json');
+
+      final now = DateTime.now();
+      final lastCheck = await UpdateService.readLastCheck(marker);
+      if (lastCheck != null && now.difference(lastCheck) < UpdateService.startupCheckCooldown) return;
+
+      // Record the attempt up front so a failing network connection does not
+      // turn into a request on every single launch.
+      await UpdateService.writeLastCheck(marker, now);
+
+      final packageInfo = await PackageInfo.fromPlatform();
+      final installed = await UpdateInstaller.installedApp();
+      final service = UpdateService(
+        owner: UpdateService.defaultOwner,
+        repository: UpdateService.defaultRepository,
+        installedVersion: '${packageInfo.version}+${packageInfo.buildNumber}',
+        installedPackageName: installed.packageName,
+        supportedAbis: await UpdateInstaller.supportedAbis(),
+      );
+
+      final result = await service.checkForUpdates();
+      service.close();
+
+      if (result is! UpdateAvailable) return;
+
+      final version = result.release.version.toString();
+      GlobalSnackbar.message(
+        (context) => AppLocalizations.of(context)!.updateStartupSnackbar(version),
+        action: (context) => SnackBarAction(
+          label: AppLocalizations.of(context)!.checkForUpdates,
+          onPressed: () => Navigator.of(context).pushNamed(CheckForUpdatesScreen.routeName),
+        ),
+      );
+    } catch (e) {
+      _homeScreenLogger.info("Startup update check skipped: $e");
+    }
+  }
 
   void _refresh() async {
     for (var section in ref.watch(finampSettingsProvider.homeScreenConfiguration).sections) {
@@ -140,31 +201,6 @@ class _HomeScreenContentState extends ConsumerState<HomeScreenContent>
                 .map((sectionInfo) => HomeScreenSection(sectionInfo: sectionInfo))
                 .toList(),
           ),
-          const SliverPadding(padding: EdgeInsets.only(top: 30)),
-          ...[
-            SliverToBoxAdapter(
-              child: Center(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: 200),
-                  child: BalancedText(
-                    context.l10n.lookingForSomethingElse,
-                    textAlign: TextAlign.center,
-                    style: TextTheme.of(context).bodySmall,
-                  ),
-                ),
-              ),
-            ),
-            const SliverPadding(padding: EdgeInsets.only(top: 12)),
-            SliverToBoxAdapter(
-              child: Center(
-                child: CTASmall(
-                  text: context.l10n.customizeHomeScreen,
-                  icon: TablerIcons.settings,
-                  onPressed: () => Navigator.pushNamed(context, HomeScreenSettingsScreen.routeName),
-                ),
-              ),
-            ),
-          ],
           /*const SliverPadding(padding: EdgeInsets.only(top: 60)),
           ...[
             // monochrome icon
