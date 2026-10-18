@@ -59,14 +59,10 @@ Feature presence was verified by inspecting the project source. Runtime behaviou
 
 ## Screenshots
 
-> [!NOTE]
-> No Extify-branded screenshots have been committed to this repository yet. The images under `images/`, `assets/`, and `fastlane/metadata/android/en-US/images/` are inherited from upstream Finamp and show the upstream build and branding, so they are intentionally **not** presented here as Extify screenshots.
-
-Replace the placeholders below once screenshots of an Extify build exist (for example in `docs/screenshots/`):
 
 | Login | Home / Library | Now playing | Downloads |
 | --- | --- | --- | --- |
-| _TODO: `docs/screenshots/login.png`_ | _TODO: `docs/screenshots/home.png`_ | _TODO: `docs/screenshots/player.png`_ | _TODO: `docs/screenshots/downloads.png`_ |
+| <img src="docs/screenshots/login.png" width="180 height="360"> | <img src="docs/screenshots/home.png" width="180 height="360"> | <img src="docs/screenshots/player.png" width="180 height="360"> | <img src="docs/screenshots/downloads.png" width="180 height="360"> |
 
 ## Supported platforms and requirements
 
