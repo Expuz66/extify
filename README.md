@@ -59,10 +59,9 @@ Feature presence was verified by inspecting the project source. Runtime behaviou
 
 ## Screenshots
 
-
-| Login | Home / Library | Now playing | Downloads |
-| --- | --- | --- | --- |
-| <img src="docs/screenshots/login.png" width="180 height="360"> | <img src="docs/screenshots/home.png" width="180 height="360"> | <img src="docs/screenshots/player.png" width="180 height="360"> | <img src="docs/screenshots/downloads.png" width="180 height="360"> |
+| Login | Home / Library | Now Playing | Downloads |
+| :---: | :---: | :---: | :---: |
+| ![Extify login screen](docs/screenshots/login.png) | ![Extify home and library screen](docs/screenshots/home.png) | ![Extify now playing screen](docs/screenshots/player.png) | ![Extify downloads screen](docs/screenshots/downloads.png) |
 
 ## Supported platforms and requirements
 
