@@ -59,9 +59,24 @@ Feature presence was verified by inspecting the project source. Runtime behaviou
 
 ## Screenshots
 
-| Login | Home / Library | Now Playing | Downloads |
-| :---: | :---: | :---: | :---: |
-| ![Extify login screen](docs/screenshots/login.png) | ![Extify home and library screen](docs/screenshots/home.png) | ![Extify now playing screen](docs/screenshots/player.png) | ![Extify downloads screen](docs/screenshots/downloads.png) |
+<table>
+  <thead>
+    <tr>
+      <th>Login</th>
+      <th>Home / Library</th>
+      <th>Now Playing</th>
+      <th>Downloads</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="docs/screenshots/readme/login.png" alt="Extify login screen" width="180"></td>
+      <td><img src="docs/screenshots/readme/home.png" alt="Extify home and library screen" width="180"></td>
+      <td><img src="docs/screenshots/readme/player.png" alt="Extify now playing screen" width="180"></td>
+      <td><img src="docs/screenshots/readme/downloads.png" alt="Extify downloads screen" width="180"></td>
+    </tr>
+  </tbody>
+</table>
 
 ## Supported platforms and requirements
 
