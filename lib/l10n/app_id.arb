@@ -3875,13 +3875,40 @@
     "@updateNotSupported": {
         "description": "Shown on platforms that cannot install Android packages"
     },
-    "updateStartupSnackbar": "Extify {version} sudah tersedia.",
-    "@updateStartupSnackbar": {
-        "description": "Non-blocking notice shown at startup when an update exists",
-        "placeholders": {
-            "version": {
-                "type": "String"
-            }
-        }
+    "updateDialogTitle": "Pembaruan tersedia",
+    "@updateDialogTitle": {
+        "description": "Heading of the dialog shown at startup when a newer stable release exists"
+    },
+    "updateDialogCurrentVersion": "Versi saat ini",
+    "@updateDialogCurrentVersion": {
+        "description": "Label for the installed version inside the update dialog"
+    },
+    "updateDialogNewVersion": "Versi baru",
+    "@updateDialogNewVersion": {
+        "description": "Label for the available version inside the update dialog"
+    },
+    "updateDialogPublished": "Diterbitkan",
+    "@updateDialogPublished": {
+        "description": "Label for the release publication date inside the update dialog"
+    },
+    "updateDialogChangelog": "Yang baru",
+    "@updateDialogChangelog": {
+        "description": "Heading above the release notes inside the update dialog"
+    },
+    "updateDialogNoChangelog": "Rilis ini tidak menyertakan catatan rilis.",
+    "@updateDialogNoChangelog": {
+        "description": "Fallback text inside the update dialog when the release body is empty"
+    },
+    "updateDialogUpdateNow": "Perbarui sekarang",
+    "@updateDialogUpdateNow": {
+        "description": "Primary button in the update dialog that starts the verified download"
+    },
+    "updateDialogLater": "Nanti",
+    "@updateDialogLater": {
+        "description": "Secondary button in the update dialog that dismisses this release"
+    },
+    "updateRetryDownloadButton": "Coba unduh lagi",
+    "@updateRetryDownloadButton": {
+        "description": "Button that retries a failed APK download without re-checking the release"
     }
 }

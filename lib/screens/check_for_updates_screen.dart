@@ -18,7 +18,13 @@ enum _Stage { checking, upToDate, available, downloading, verifying, ready, erro
 /// signing certificate are compared with the installed app, and the actual
 /// install is handed to Android's package installer for the user to confirm.
 class CheckForUpdatesScreen extends StatefulWidget {
-  const CheckForUpdatesScreen({super.key});
+  const CheckForUpdatesScreen({super.key, this.autoDownload = false});
+
+  /// When true, a release found by the first check is downloaded straight away
+  /// instead of waiting for another tap. Used by the startup "Update now" path,
+  /// where the user already chose to update. Verification, the permission
+  /// prompt and the install confirmation are unchanged.
+  final bool autoDownload;
 
   static const routeName = "/check-for-updates";
 
@@ -45,6 +51,11 @@ class _CheckForUpdatesScreenState extends State<CheckForUpdatesScreen> {
 
   bool _canInstallPackages = true;
   bool _cancelRequested = false;
+
+  /// Set when the screen was opened via "Update now"; cleared once the first
+  /// check has had its chance to start the download, so a later "Check again"
+  /// never starts an unattended download.
+  late bool _autoDownloadPending = widget.autoDownload;
 
   @override
   void initState() {
@@ -118,6 +129,11 @@ class _CheckForUpdatesScreenState extends State<CheckForUpdatesScreen> {
           _errorDetail = result.error.detail;
           _stage = _Stage.error;
         });
+    }
+
+    if (_autoDownloadPending && _stage == _Stage.available) {
+      _autoDownloadPending = false;
+      await _download();
     }
   }
 
@@ -326,6 +342,9 @@ class _CheckForUpdatesScreenState extends State<CheckForUpdatesScreen> {
             title: Text(_errorMessage ?? ''),
             subtitle: _errorDetail == null ? null : Text(_errorDetail!),
           ),
+          // Retrying the download is safe: the partial file is discarded and the
+          // asset is fetched again from the URL the API returned.
+          if (_release != null) _buildRetryDownloadButton(l10n),
           _buildCheckAgainButton(l10n),
         ];
 
@@ -433,6 +452,15 @@ class _CheckForUpdatesScreenState extends State<CheckForUpdatesScreen> {
         ];
     }
   }
+
+  Widget _buildRetryDownloadButton(AppLocalizations l10n) => Padding(
+    padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0.0),
+    child: FilledButton.icon(
+      onPressed: _download,
+      icon: const Icon(TablerIcons.download),
+      label: Text(l10n.updateRetryDownloadButton),
+    ),
+  );
 
   Widget _buildCheckAgainButton(AppLocalizations l10n) => Padding(
     padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0.0),

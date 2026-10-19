@@ -414,6 +414,51 @@ void main() {
     });
   });
 
+  group('dismissed release memory', () {
+    test('round-trips the dismissed release version', () async {
+      final directory = await Directory.systemTemp.createTemp('extify-dismiss-test');
+      addTearDown(() => directory.delete(recursive: true));
+      final marker = File('${directory.path}${Platform.pathSeparator}update_check.json');
+
+      expect(await UpdateService.readDismissedVersion(marker), isNull);
+
+      await UpdateService.writeDismissedVersion(marker, '1.0.3');
+
+      expect(await UpdateService.readDismissedVersion(marker), const AppVersion(1, 0, 3));
+    });
+
+    test('ignores a dismissed version that cannot be parsed', () async {
+      final directory = await Directory.systemTemp.createTemp('extify-dismiss-garbage');
+      addTearDown(() => directory.delete(recursive: true));
+      final marker = File('${directory.path}${Platform.pathSeparator}update_check.json');
+      await marker.writeAsString(jsonEncode({'dismissedVersion': 'next tuesday'}));
+
+      expect(await UpdateService.readDismissedVersion(marker), isNull);
+    });
+
+    test('the cooldown and the dismissed version do not overwrite each other', () async {
+      final directory = await Directory.systemTemp.createTemp('extify-marker-merge');
+      addTearDown(() => directory.delete(recursive: true));
+      final marker = File('${directory.path}${Platform.pathSeparator}update_check.json');
+      final when = DateTime.fromMillisecondsSinceEpoch(1750000000000);
+
+      await UpdateService.writeDismissedVersion(marker, '1.0.3');
+      await UpdateService.writeLastCheck(marker, when);
+      expect(await UpdateService.readDismissedVersion(marker), const AppVersion(1, 0, 3));
+
+      await UpdateService.writeDismissedVersion(marker, '1.0.4');
+      expect(await UpdateService.readLastCheck(marker), when);
+      expect(await UpdateService.readDismissedVersion(marker), const AppVersion(1, 0, 4));
+    });
+
+    test('prompts for anything until a release is dismissed, then only for newer ones', () {
+      expect(UpdateService.shouldPromptFor(const AppVersion(1, 0, 3), null), isTrue);
+      expect(UpdateService.shouldPromptFor(const AppVersion(1, 0, 3), const AppVersion(1, 0, 2)), isTrue);
+      expect(UpdateService.shouldPromptFor(const AppVersion(1, 0, 3), const AppVersion(1, 0, 3)), isFalse);
+      expect(UpdateService.shouldPromptFor(const AppVersion(1, 0, 3), const AppVersion(1, 0, 4)), isFalse);
+    });
+  });
+
   group('downloaded APK validation', () {
     InstalledAppInfo installed({List<String>? digests}) => InstalledAppInfo(
       packageName: 'com.expuz.extify',

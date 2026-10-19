@@ -3953,13 +3953,40 @@
   "@updateNotSupported": {
     "description": "Shown on platforms that cannot install Android packages"
   },
-  "updateStartupSnackbar": "Extify {version} is available.",
-  "@updateStartupSnackbar": {
-    "description": "Non-blocking notice shown at startup when an update exists",
-    "placeholders": {
-      "version": {
-        "type": "String"
-      }
-    }
+  "updateDialogTitle": "Update available",
+  "@updateDialogTitle": {
+    "description": "Heading of the dialog shown at startup when a newer stable release exists"
+  },
+  "updateDialogCurrentVersion": "Current version",
+  "@updateDialogCurrentVersion": {
+    "description": "Label for the installed version inside the update dialog"
+  },
+  "updateDialogNewVersion": "New version",
+  "@updateDialogNewVersion": {
+    "description": "Label for the available version inside the update dialog"
+  },
+  "updateDialogPublished": "Published",
+  "@updateDialogPublished": {
+    "description": "Label for the release publication date inside the update dialog"
+  },
+  "updateDialogChangelog": "What's new",
+  "@updateDialogChangelog": {
+    "description": "Heading above the release notes inside the update dialog"
+  },
+  "updateDialogNoChangelog": "This release has no release notes.",
+  "@updateDialogNoChangelog": {
+    "description": "Fallback text inside the update dialog when the release body is empty"
+  },
+  "updateDialogUpdateNow": "Update now",
+  "@updateDialogUpdateNow": {
+    "description": "Primary button in the update dialog that starts the verified download"
+  },
+  "updateDialogLater": "Later",
+  "@updateDialogLater": {
+    "description": "Secondary button in the update dialog that dismisses this release"
+  },
+  "updateRetryDownloadButton": "Try the download again",
+  "@updateRetryDownloadButton": {
+    "description": "Button that retries a failed APK download without re-checking the release"
   }
 }

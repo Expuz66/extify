@@ -12,7 +12,7 @@ Extify is a customized build of the open-source [Finamp](https://github.com/fina
 | Application name | Extify | `android/app/build.gradle` (`resValue "string", "app_name"`), `lib/main.dart` |
 | Android application ID (release) | `com.expuz.extify` | `android/app/build.gradle` |
 | Android application ID (debug) | `com.expuz.extify.debug` | `android/app/build.gradle` (`applicationIdSuffix '.debug'`) |
-| Version | `1.0.2+202` (versionName `1.0.2`, versionCode `202`) | `pubspec.yaml` |
+| Version | `1.0.3+203` (versionName `1.0.3`, versionCode `203`) | `pubspec.yaml` |
 | Dart package name | `finamp` (unchanged from upstream) | `pubspec.yaml` |
 | Dart SDK constraint | `^3.9.0` | `pubspec.yaml` |
 | Android SDK levels | min 24, target 36, compile 36 | built APK manifest, `android/app/build.gradle` |

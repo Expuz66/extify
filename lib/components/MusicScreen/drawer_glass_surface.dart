@@ -16,20 +16,34 @@ const drawerShape = RoundedRectangleBorder(borderRadius: BorderRadius.horizontal
 /// on every rebuild of every affected tile. The [DecoratedBox] below therefore
 /// only draws the border (no colour of its own).
 ///
-/// The effect is deliberately restrained: the panel stays clearly darker than
-/// the screen behind it and only keeps a faint hint of the content below, which
-/// also keeps the text contrast intact.
+/// The panel is a thin veil: 20 % opaque, i.e. 80 % transparent, so the screen
+/// behind it stays visible through the blur. The tint is [ColorScheme.surface],
+/// which is pure black (0xFF000000) on the AMOLED scheme, so the glass stays
+/// dark and elegant instead of washing out. The Scaffold's own drawer scrim
+/// ([Colors.black54] by default) sits *below* the panel and already dims what is
+/// behind it, so the effective backdrop is about `0.46 x 0.80 = 37 %` of the
+/// original brightness - dark enough for [ColorScheme.onSurface] text, list
+/// tiles and icons to stay readable.
 ///
 /// The backdrop blur is skipped when the platform asks for reduced motion,
-/// which doubles as the cheap fallback on low end devices. A closed drawer is
-/// not laid out at all, so no blur is ever rasterised while the drawer is shut.
+/// which doubles as the cheap fallback on low end devices. Without the blur the
+/// content behind stays sharp, so that fallback keeps a thicker veil (22 %
+/// transparent) instead of letting the screen compete with the text. A closed
+/// drawer is not laid out at all, so no blur is ever rasterised while the
+/// drawer is shut.
 class DrawerGlassSurface extends StatelessWidget {
   const DrawerGlassSurface({super.key, required this.child});
 
   final Widget child;
 
-  /// How much of the screen behind the drawer remains visible.
-  static const double _panelOpacity = 0.82;
+  /// Share of the panel covered by the tint: 0.20 = 80 % transparency, the
+  /// design target for the glass.
+  static const double _panelOpacity = 0.20;
+
+  /// Panel opacity used when the backdrop is not blurred (reduced motion).
+  /// Sharp content behind the panel needs to be pushed back further, so this
+  /// fallback is only 22 % transparent.
+  static const double _panelOpacityUnblurred = 0.78;
 
   /// Small sigma: enough to soften what is behind the panel without turning the
   /// backdrop filter into an expensive full-screen effect.
@@ -41,7 +55,7 @@ class DrawerGlassSurface extends StatelessWidget {
     final useBlur = !MediaQuery.disableAnimationsOf(context);
 
     final panel = Material(
-      color: useBlur ? colorScheme.surface.withValues(alpha: _panelOpacity) : colorScheme.surface,
+      color: colorScheme.surface.withValues(alpha: useBlur ? _panelOpacity : _panelOpacityUnblurred),
       shape: drawerShape,
       clipBehavior: Clip.antiAlias,
       child: DecoratedBox(

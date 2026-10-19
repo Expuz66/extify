@@ -12,6 +12,7 @@ import 'package:finamp/components/MusicScreen/item_wrapper.dart';
 import 'package:finamp/components/MusicScreen/music_screen_tab_view.dart';
 import 'package:finamp/components/finamp_section_header.dart';
 import 'package:finamp/components/global_snackbar.dart';
+import 'package:finamp/components/update_available_dialog.dart';
 import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/menus/components/icon_button_with_semantics.dart';
 import 'package:finamp/menus/home_section_menu.dart';
@@ -65,9 +66,13 @@ class _HomeScreenContentState extends ConsumerState<HomeScreenContent>
   /// Best-effort update check that must never interfere with startup.
   ///
   /// It runs at most once per [UpdateService.startupCheckCooldown], records the
-  /// attempt before contacting GitHub, stays silent unless a newer stable
-  /// release exists, and reports nothing at all when anything goes wrong. The
-  /// manual entry point lives in Settings.
+  /// attempt before contacting GitHub, and stays silent in every failure case:
+  /// offline devices, timeouts, rate limits and malformed responses are all
+  /// swallowed, so a broken connection can never turn into a stream of error
+  /// dialogs. The manual entry point lives in Settings.
+  ///
+  /// When a newer stable release exists and the user has not already sent it
+  /// away, the "Update available" dialog is shown instead of a snackbar.
   Future<void> _maybeCheckForUpdatesOnStartup() async {
     if (!UpdateInstaller.isSupported) return;
 
@@ -82,6 +87,9 @@ class _HomeScreenContentState extends ConsumerState<HomeScreenContent>
       // Record the attempt up front so a failing network connection does not
       // turn into a request on every single launch.
       await UpdateService.writeLastCheck(marker, now);
+
+      // Offline mode means "do not touch the network", so honour it.
+      if (ref.read(finampSettingsProvider.isOffline)) return;
 
       final packageInfo = await PackageInfo.fromPlatform();
       final installed = await UpdateInstaller.installedApp();
@@ -98,14 +106,38 @@ class _HomeScreenContentState extends ConsumerState<HomeScreenContent>
 
       if (result is! UpdateAvailable) return;
 
-      final version = result.release.version.toString();
-      GlobalSnackbar.message(
-        (context) => AppLocalizations.of(context)!.updateStartupSnackbar(version),
-        action: (context) => SnackBarAction(
-          label: AppLocalizations.of(context)!.checkForUpdates,
-          onPressed: () => Navigator.of(context).pushNamed(CheckForUpdatesScreen.routeName),
-        ),
+      final release = result.release;
+      final dismissed = await UpdateService.readDismissedVersion(marker);
+      if (!UpdateService.shouldPromptFor(release.version, dismissed)) return;
+
+      if (!mounted) return;
+
+      final wantsUpdate = await showUpdateAvailableDialog(
+        context,
+        release: release,
+        installedVersion: packageInfo.version,
       );
+
+      // A dialog was already on screen, so nothing was asked: leave the memory
+      // alone instead of accidentally recording a dismissal.
+      if (wantsUpdate == null) return;
+
+      if (!wantsUpdate) {
+        // "Later", the barrier tap and the back gesture all land here: stay
+        // quiet about this release until a newer one shows up.
+        await UpdateService.writeDismissedVersion(marker, release.version.toString());
+        return;
+      }
+
+      // "Update now" hands over to the existing verified download and install
+      // flow, which checks the release again and reports progress on its own
+      // screen.
+      final navigator = GlobalSnackbar.navigatorState;
+      if (navigator != null) {
+        await navigator.push(
+          MaterialPageRoute<void>(builder: (context) => const CheckForUpdatesScreen(autoDownload: true)),
+        );
+      }
     } catch (e) {
       _homeScreenLogger.info("Startup update check skipped: $e");
     }

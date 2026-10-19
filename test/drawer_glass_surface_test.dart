@@ -78,12 +78,29 @@ void main() {
     expect(material.color!.r, surface.r);
     expect(material.color!.g, surface.g);
     expect(material.color!.b, surface.b);
-    expect(material.color!.a, inExclusiveRange(0.0, 1.0), reason: 'translucent accent, not invisible');
+    expect(material.color!.a, closeTo(0.20, 0.001), reason: '80 % transparency is the design target for the glass');
+    expect(material.color!.a, lessThan(0.5), reason: 'the screen behind must stay visible');
     expect(material.shape, drawerShape);
     expect(find.descendant(of: find.byType(DrawerGlassSurface), matching: find.byType(BackdropFilter)), findsOneWidget);
   });
 
-  testWidgets('reduced motion falls back to an opaque panel without a backdrop blur', (tester) async {
+  testWidgets('the glass keeps a backdrop blur', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(body: DrawerGlassSurface(child: SizedBox())),
+      ),
+    );
+
+    final filter = tester
+        .widget<BackdropFilter>(
+          find.descendant(of: find.byType(DrawerGlassSurface), matching: find.byType(BackdropFilter)),
+        )
+        .filter;
+
+    expect(filter.toString(), contains('blur'));
+  });
+
+  testWidgets('reduced motion falls back to a thicker veil without a backdrop blur', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Builder(
@@ -96,6 +113,11 @@ void main() {
     );
 
     expect(find.descendant(of: find.byType(DrawerGlassSurface), matching: find.byType(BackdropFilter)), findsNothing);
-    expect(panelMaterial(tester).color!.a, 1.0);
+    expect(
+      panelMaterial(tester).color!.a,
+      closeTo(0.78, 0.001),
+      reason: 'without the blur the unsharp backdrop needs the thicker veil',
+    );
+    expect(panelMaterial(tester).color!.a, lessThan(1.0), reason: 'still hinting at the screen behind');
   });
 }

@@ -176,7 +176,27 @@ class UpdateCheckFailed extends UpdateCheckResult {
 ///
 /// Deliberately constructed with plain values instead of reading platform APIs
 /// itself, so the version/asset logic is unit-testable without any platform
-/// channel. Use [forDevice] on Android to fill those in.
+/// channel; [UpdateInstaller] supplies the installed package name and the
+/// device's ABIs on Android.
+///
+/// ## Release asset naming convention
+///
+/// Only published, stable releases are considered, and the APK is always taken
+/// from the `browser_download_url` the API returns - no download URL is ever
+/// built here. Assets are matched by name, in this order:
+///
+/// 1. `app-<abi>-release.apk` for one of [knownAbis] (`arm64-v8a`,
+///    `armeabi-v7a`, `x86_64`, `x86`) - Flutter's `--split-per-abi` names.
+///    Preferred, because they are roughly 40 % smaller than the universal
+///    build.
+/// 2. a single asset whose name contains `universal`, e.g.
+///    `app-release-universal.apk`.
+/// 3. a single asset whose name contains no ABI at all, e.g.
+///    `extify-android.apk`.
+///
+/// `.sha1` / `.sha256` sidecars are ignored because they are not APKs. Keep at
+/// most one asset per name, and keep the ABI-less fallback unique, so the
+/// choice stays deterministic.
 class UpdateService {
   UpdateService({
     required this.owner,
@@ -197,9 +217,11 @@ class UpdateService {
   /// before the shorter `arm64` style names.
   static const List<String> knownAbis = ['arm64-v8a', 'armeabi-v7a', 'x86_64', 'x86'];
 
-  /// Minimum gap between automatic startup checks. The manual check in Settings
-  /// is never throttled.
-  static const Duration startupCheckCooldown = Duration(hours: 24);
+  /// Minimum gap between automatic startup checks, so relaunching the app a few
+  /// times in a row does not turn into a burst of API calls. Kept short so a
+  /// release published after the last check is still offered the same day; the
+  /// manual check in Settings is never throttled.
+  static const Duration startupCheckCooldown = Duration(hours: 1);
 
   final String owner;
   final String repository;
@@ -410,30 +432,68 @@ class UpdateService {
     }
   }
 
-  /// Remembers when the last automatic check happened, so the startup check can
-  /// respect a cooldown without touching the settings database.
-  static Future<DateTime?> readLastCheck(File file) async {
+  /// Timestamp of the last automatic check inside the marker file.
+  static const String _lastCheckKey = 'lastCheckEpochMs';
+
+  /// Version the user dismissed inside the marker file.
+  static const String _dismissedVersionKey = 'dismissedVersion';
+
+  /// Reads the updater's marker file. A missing, unreadable or corrupt file is
+  /// reported as "nothing remembered" rather than as an error.
+  static Future<Map<String, dynamic>> _readMarker(File file) async {
     try {
-      if (!await file.exists()) return null;
+      if (!await file.exists()) return <String, dynamic>{};
       final decoded = jsonDecode(await file.readAsString());
-      if (decoded is! Map<String, dynamic>) return null;
-      final millis = decoded['lastCheckEpochMs'];
-      if (millis is! num) return null;
-      return DateTime.fromMillisecondsSinceEpoch(millis.toInt());
+      if (decoded is! Map<String, dynamic>) return <String, dynamic>{};
+      return decoded;
     } catch (_) {
-      // A corrupt or unreadable marker just means "no previous check".
-      return null;
+      // A corrupt or unreadable marker just means "nothing remembered".
+      return <String, dynamic>{};
     }
   }
 
-  static Future<void> writeLastCheck(File file, DateTime when) async {
+  /// Merges [patch] into the marker file so the two kinds of memory stored in
+  /// it (cooldown timestamp, dismissed version) cannot overwrite each other.
+  static Future<void> _patchMarker(File file, Map<String, dynamic> patch) async {
     try {
+      final marker = await _readMarker(file);
+      marker.addAll(patch);
       await file.parent.create(recursive: true);
-      await file.writeAsString(jsonEncode({'lastCheckEpochMs': when.millisecondsSinceEpoch}));
+      await file.writeAsString(jsonEncode(marker));
     } catch (_) {
-      // Best effort only; failing to record the cooldown must never break the app.
+      // Best effort only; failing to record updater memory must never break the
+      // app.
     }
   }
+
+  /// Remembers when the last automatic check happened, so the startup check can
+  /// respect a cooldown without touching the settings database.
+  static Future<DateTime?> readLastCheck(File file) async {
+    final millis = (await _readMarker(file))[_lastCheckKey];
+    if (millis is! num) return null;
+    return DateTime.fromMillisecondsSinceEpoch(millis.toInt());
+  }
+
+  static Future<void> writeLastCheck(File file, DateTime when) =>
+      _patchMarker(file, {_lastCheckKey: when.millisecondsSinceEpoch});
+
+  /// The release the user last sent away with "Later" (or by dismissing the
+  /// dialog), so the same release is not offered on every launch.
+  static Future<AppVersion?> readDismissedVersion(File file) async {
+    final raw = (await _readMarker(file))[_dismissedVersionKey];
+    if (raw is! String) return null;
+    return AppVersion.tryParse(raw);
+  }
+
+  /// Stores [version] as dismissed. A newer release clears the effect by itself
+  /// because [shouldPromptFor] compares versions instead of strings.
+  static Future<void> writeDismissedVersion(File file, String version) =>
+      _patchMarker(file, {_dismissedVersionKey: version});
+
+  /// Whether a release is worth interrupting the user for: nothing was
+  /// dismissed yet, or [available] is newer than what was dismissed.
+  static bool shouldPromptFor(AppVersion available, AppVersion? dismissed) =>
+      dismissed == null || available > dismissed;
 
   void close() => _client.close();
 }
